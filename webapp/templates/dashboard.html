@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - GMU Campus Compass{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title">Hi {{ username }}! 👋</h1>
+                <p class="card-text lead">Welcome to your dashboard.</p>
+                <hr>
+                <p>This is your personal dashboard. More features coming soon!</p>
+                <div class="mt-4">
+                    <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Home - GMU Campus Compass{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2 text-center">
+        <h1 class="mb-4">Welcome to GMU Campus Compass</h1>
+        <p class="lead mb-4">Your guide to navigating George Mason University</p>
+        
+        {% if current_user.is_authenticated %}
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Hi {{ current_user.username }}!</h4>
+                <p>Welcome back to Campus Compass. Ready to explore?</p>
+                <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">New User?</h5>
+                            <p class="card-text">Create an account to get started.</p>
+                            <a href="{{ url_for('auth.signup') }}" class="btn btn-success">Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Existing User?</h5>
+                            <p class="card-text">Log in to your account.</p>
+                            <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

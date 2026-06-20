@@ -17,6 +17,12 @@ def dashboard():
     """Dashboard - only accessible when logged in"""
     return render_template('dashboard.html', username=current_user.username)
 
+@main_bp.route('/academicResource')
+@login_required
+def academicResource():
+    """Academic resource page"""
+    return render_template('academicResources.html')
+
 
 if __name__ == '__main__':
     app = create_app()

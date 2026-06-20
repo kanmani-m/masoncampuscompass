@@ -23,6 +23,12 @@ def academicResource():
     """Academic resource page"""
     return render_template('academicResources.html')
 
+@main_bp.route('/dining')
+@login_required
+def dining():
+    """Dining and food resources page"""
+    return render_template('dining.html')
+
 
 if __name__ == '__main__':
     app = create_app()

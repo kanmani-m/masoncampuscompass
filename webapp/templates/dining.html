@@ -1,0 +1,353 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dining.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="dining-container">
+    <div class="dining-header">
+        <h1>🍽️ Mason Dining Guide</h1>
+        <p>Everything you need to know about dining on campus</p>
+    </div>
+
+    <!-- Dining Locations Section -->
+    <section class="dining-section">
+        <h2 class="section-title">📍 Dining Locations</h2>
+        
+        <div class="locations-grid">
+            <!-- Dining Halls -->
+            <div class="location-card dining-hall">
+                <div class="card-icon">🏢</div>
+                <h3>Dining Halls</h3>
+                <ul class="location-list">
+                    <li>Southside Dining Hall</li>
+                    <li>Ike's Dining Hall</li>
+                    <li>The Globe Dining Hall</li>
+                    <li>The Spot: Where Plants Power You!</li>
+                    <li>The Commons</li>
+                </ul>
+                <p class="card-description">Full-service dining halls offering unlimited access with meal swipes</p>
+            </div>
+
+            <!-- Retail Dining -->
+            <div class="location-card retail-dining">
+                <div class="card-icon">🍕</div>
+                <h3>Retail Dining</h3>
+                <ul class="location-list">
+                    <li>Starbucks (Multiple Locations)</li>
+                    <li>Chipotle</li>
+                    <li>Chick-Fil-A</li>
+                    <li>Panera Bread</li>
+                    <li>Panda Express</li>
+                    <li>Blaze Pizza</li>
+                    <li>The Halal Guys</li>
+                    <li>ACE Sushi</li>
+                    <li>The Eaterie</li>
+                    <li>And many more!</li>
+                </ul>
+                <p class="card-description">Quick-service restaurants and cafes across campus</p>
+            </div>
+
+            <!-- Additional Locations -->
+            <div class="location-card additional">
+                <div class="card-icon">🛒</div>
+                <h3>Markets & Convenience</h3>
+                <ul class="location-list">
+                    <li>Market - Johnson Center</li>
+                    <li>Market - Blue Ridge</li>
+                    <li>Market - Rogers Hall</li>
+                    <li>Patriot Snack Stop #1</li>
+                    <li>Patriot Snack Stop #2</li>
+                    <li>Randall's Cafe</li>
+                    <li>Mason Square Cafe</li>
+                </ul>
+                <p class="card-description">Quick grab-and-go options throughout campus</p>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <p>📱 Download the <strong>Dine On Campus</strong> app to check real-time hours and menus!</p>
+        </div>
+    </section>
+
+    <!-- Meal Plans Section -->
+    <section class="dining-section">
+        <h2 class="section-title">💳 Meal Plans</h2>
+        <p class="section-subtitle">Choose the plan that fits your dining style and budget</p>
+
+        <div class="meal-plans-grid">
+            <!-- Unlimited Plans -->
+            <div class="plan-category">
+                <h3 class="category-title">Unlimited Dining</h3>
+                
+                <div class="meal-plan-card">
+                    <div class="plan-badge">Popular</div>
+                    <h4>Independence</h4>
+                    <p class="plan-price">Starting at $3,045/semester</p>
+                    <ul class="plan-features">
+                        <li>✔ Unlimited meal swipes</li>
+                        <li>✔ $100-$500 Dining Dollars</li>
+                        <li>✔ 2 Meal Exchanges daily</li>
+                        <li>✔ 3 guest meals</li>
+                        <li>✘ No break access</li>
+                    </ul>
+                    <p class="plan-description">Best for first-year students wanting unlimited flexibility</p>
+                </div>
+
+                <div class="meal-plan-card">
+                    <h4>Independence Extended</h4>
+                    <p class="plan-price">Starting at $3,190/semester</p>
+                    <ul class="plan-features">
+                        <li>✔ Unlimited meal swipes</li>
+                        <li>✔ Thanksgiving & Spring Break access</li>
+                        <li>✔ $100-$500 Dining Dollars</li>
+                    </ul>
+                    <p class="plan-description">Same as Independence + break access</p>
+                </div>
+
+                <div class="meal-plan-card">
+                    <h4>Independence Ultimate</h4>
+                    <p class="plan-price">Starting at $3,685/semester</p>
+                    <ul class="plan-features">
+                        <li>✔ Unlimited meal swipes</li>
+                        <li>✔ Full academic year access</li>
+                        <li>✔ All holiday breaks included</li>
+                    </ul>
+                    <p class="plan-description">Perfect for students staying on campus during holidays</p>
+                </div>
+            </div>
+
+            <!-- Flexible Weekly Plans -->
+            <div class="plan-category">
+                <h3 class="category-title">Flexible Weekly</h3>
+                
+                <div class="meal-plan-card">
+                    <h4>Liberty 14</h4>
+                    <p class="plan-price">$3,145/semester</p>
+                    <ul class="plan-features">
+                        <li>✔ 14 meals per week</li>
+                        <li>✔ $635 Dining Dollars</li>
+                        <li>✔ Meal Exchange available</li>
+                    </ul>
+                    <p class="plan-description">Great for students who eat regularly on campus</p>
+                </div>
+
+                <div class="meal-plan-card">
+                    <h4>Liberty 9</h4>
+                    <p class="plan-price">$3,145/semester</p>
+                    <ul class="plan-features">
+                        <li>✔ 9 meals per week</li>
+                        <li>✔ $1,440 Dining Dollars</li>
+                        <li>✔ More flexibility with retail dining</li>
+                    </ul>
+                    <p class="plan-description">Perfect for students who prefer retail dining</p>
+                </div>
+            </div>
+
+            <!-- Flexible Semester Plans -->
+            <div class="plan-category">
+                <h3 class="category-title">Flexible Semester</h3>
+                <p class="category-description">Best for students who cook often or live off-campus</p>
+                
+                <div class="meal-plan-card meal-plan-small">
+                    <h4>Patriot 15</h4>
+                    <p class="plan-price">From $210 + Dining Dollars</p>
+                    <p>15 meal swipes/semester</p>
+                </div>
+
+                <div class="meal-plan-card meal-plan-small">
+                    <h4>Patriot 25</h4>
+                    <p class="plan-price">From $310 + Dining Dollars</p>
+                    <p>25 meal swipes/semester</p>
+                </div>
+
+                <div class="meal-plan-card meal-plan-small">
+                    <h4>Patriot 55</h4>
+                    <p class="plan-price">From $580 + Dining Dollars</p>
+                    <p>55 meal swipes/semester (Most Popular)</p>
+                </div>
+
+                <div class="meal-plan-card meal-plan-small">
+                    <h4>Patriot 85</h4>
+                    <p class="plan-price">From $845 + Dining Dollars</p>
+                    <p>85 meal swipes/semester</p>
+                </div>
+            </div>
+
+            <!-- Dining Dollars Only -->
+            <div class="plan-category">
+                <h3 class="category-title">Dining Dollars Only</h3>
+                <p class="category-description">Maximum flexibility • Tax-free spending • 10% savings vs. cash</p>
+                
+                <div class="meal-plan-card">
+                    <h4>Dining Dollar Plans</h4>
+                    <ul class="plan-features">
+                        <li>💵 $350 - ~$22/week</li>
+                        <li>💵 $500 - ~$31/week</li>
+                        <li>💵 $750 - ~$47/week</li>
+                        <li>💵 $1,000 - ~$63/week</li>
+                        <li>💵 $1,500 - ~$94/week</li>
+                        <li>💵 $2,000 - ~$125/week</li>
+                    </ul>
+                    <p class="plan-description">Perfect for coffee runs, quick lunches, and snacks</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <h3>Ready to choose your plan?</h3>
+            <p><a href="https://gmustudentlink.atriumcampus.com/" class="btn-primary" target="_blank">Sign Up for a Meal Plan</a></p>
+            <p><a href="https://form.jotform.com/231063625328048" class="btn-secondary" target="_blank">Take the Meal Plan Quiz</a></p>
+        </div>
+    </section>
+
+    <!-- Food Insecurity Support Section -->
+    <section class="dining-section food-insecurity">
+        <h2 class="section-title">🤝 Patriot Pantry - Food Insecurity Support</h2>
+        <p class="section-subtitle">Free food and hygiene items for students in need</p>
+
+        <div class="pantry-content">
+            <div class="pantry-info-card">
+                <h3>Program Overview</h3>
+                <p>The Patriot Pantry provides access to non-perishable food and hygiene items to George Mason University students who are experiencing food insecurity.</p>
+                
+                <h4>Who Can Use It?</h4>
+                <ul>
+                    <li>Degree-seeking GMU students</li>
+                    <li>Enrolled in at least 1 credit hour</li>
+                    <li>No income verification required</li>
+                </ul>
+
+                <h4>Available at Both Campuses:</h4>
+                <div class="campus-locations">
+                    <div class="campus">
+                        <strong>📍 Fairfax Campus</strong>
+                        <p>Student Union Building 1, Room 3011</p>
+                        <p class="contact">📧 <a href="mailto:Pantry@gmu.edu">Pantry@gmu.edu</a></p>
+                    </div>
+                    <div class="campus">
+                        <strong>📍 Mason Square Campus</strong>
+                        <p>Van Metre Hall, Room 211</p>
+                        <p class="contact">📧 <a href="mailto:Mspantry@gmu.edu">Mspantry@gmu.edu</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pantry-items-card">
+                <h3>Available Items</h3>
+                
+                <div class="items-columns">
+                    <div class="items-column">
+                        <h4>Food Items</h4>
+                        <ul>
+                            <li>Pasta & Pasta Sauce</li>
+                            <li>Rice (instant or regular)</li>
+                            <li>Canned Tuna/Salmon/Chicken</li>
+                            <li>Mac N Cheese</li>
+                            <li>Instant Meals</li>
+                            <li>Mixed Vegetables</li>
+                            <li>Soups</li>
+                            <li>Peanut Butter & Jelly</li>
+                            <li>Cereal & Breakfast Items</li>
+                            <li>Healthy Snacks</li>
+                            <li>Vegetarian & Gluten-Free Options</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="items-column">
+                        <h4>Hygiene Items</h4>
+                        <ul>
+                            <li>Body Wash</li>
+                            <li>Shampoo & Conditioner</li>
+                            <li>Deodorant</li>
+                            <li>Bars of Soap</li>
+                            <li>Lotion</li>
+                            <li>Period Products</li>
+                            <li>Shaving Cream & Razors</li>
+                            <li>Toothpaste & Toothbrush</li>
+                            <li>Floss</li>
+                            <li>Laundry Detergent</li>
+                            <li>Paper Towels & Toilet Paper</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pantry-support-card">
+                <h3>Support the Pantry</h3>
+                
+                <div class="support-methods">
+                    <div class="support-method">
+                        <h4>🛒 Donate Items</h4>
+                        <p>Drop off non-expired, unopened items at:</p>
+                        <ul>
+                            <li><strong>Fairfax:</strong> SUB I, Room 3011</li>
+                            <li><strong>Mason Square:</strong> Van Metre Hall, Room 211</li>
+                        </ul>
+                    </div>
+
+                    <div class="support-method">
+                        <h4>📦 Amazon Wishlist</h4>
+                        <p>Ship items directly from Amazon:</p>
+                        <p>
+                            <a href="https://www.amazon.com/gp/registry/wishlist/3W1RAZSSCJM5/" class="btn-secondary" target="_blank">Fairfax Wishlist</a>
+                            <a href="https://www.amazon.com/hz/wishlist/ls/1J1MXJEFAEHGF?ref_=wl_share" class="btn-secondary" target="_blank">Mason Square Wishlist</a>
+                        </p>
+                    </div>
+
+                    <div class="support-method">
+                        <h4>💝 Donate Funds</h4>
+                        <p>Help keep the pantry stocked</p>
+                        <p><a href="https://advancement.gmu.edu/25ULSSAC" class="btn-primary" target="_blank">Donate Now</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="additional-resources">
+                <h3>Additional Food Assistance</h3>
+                <p>If you need more support, the Patriot Pantry can help you learn about:</p>
+                <ul>
+                    <li>🇺🇸 Virginia SNAP (Supplemental Nutrition Assistance Program)</li>
+                    <li>📞 Other campus and community resources</li>
+                </ul>
+                <p><strong>Contact:</strong> <a href="mailto:Pantry@gmu.edu">Pantry@gmu.edu</a> (Fairfax) or <a href="mailto:Mspantry@gmu.edu">Mspantry@gmu.edu</a> (Mason Square)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="dining-section contact-section">
+        <h2>📞 Contact & Resources</h2>
+        
+        <div class="contact-grid">
+            <div class="contact-card">
+                <h3>Dining Services</h3>
+                <p>Phone: <a href="tel:+17039933313">(703) 993-3313</a></p>
+                <p>Email: <a href="mailto:dining@gmu.edu">dining@gmu.edu</a></p>
+                <p>Address: 4400 University Drive MSN 2F8, Fairfax, VA</p>
+                <p><a href="https://new.dineoncampus.com/GMU" target="_blank">Mason Dining Website →</a></p>
+            </div>
+
+            <div class="contact-card">
+                <h3>Dine On Campus App</h3>
+                <p>Check real-time menus and hours</p>
+                <p><a href="https://apps.apple.com/us/app/dine-on-campus/id1170602720" target="_blank">📱 App Store</a></p>
+                <p><a href="https://play.google.com/store/apps/details?id=com.roaringsky.dineoncampus" target="_blank">🤖 Google Play</a></p>
+            </div>
+
+            <div class="contact-card">
+                <h3>Quick Links</h3>
+                <p><a href="https://new.dineoncampus.com/GMU/whats-on-the-menu" target="_blank">What's on the Menu?</a></p>
+                <p><a href="https://new.dineoncampus.com/GMU/faqs" target="_blank">Dining FAQs</a></p>
+                <p><a href="https://dineoncampus.com/GMU/dining-with-food-allergies--intolerances" target="_blank">Dietary Options</a></p>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dining.css') }}">
+{% endblock %}

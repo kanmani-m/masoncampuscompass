@@ -29,6 +29,12 @@ def dining():
     """Dining and food resources page"""
     return render_template('dining.html')
 
+@main_bp.route('/wellness-resources')
+@login_required
+def wellness_resources():
+    """Wellness resources page"""
+    return render_template('wellnessResources.html')
+
 
 if __name__ == '__main__':
     app = create_app()

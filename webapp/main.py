@@ -35,6 +35,12 @@ def wellness_resources():
     """Wellness resources page"""
     return render_template('wellnessResources.html')
 
+@main_bp.route('/career-internship-resources')
+@login_required
+def career_internship_resources():
+    """Career and internship resources page"""
+    return render_template('careerInternResources.html')
+
 
 if __name__ == '__main__':
     app = create_app()

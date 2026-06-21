@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block styles %}
+<!-- Added ?v=1 to bypass browser caching -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/careerInternResources.css') }}?v=1">
+{% endblock %}
+
+{% block title %}Career and Internship Resources at GMU{% endblock %}
+
+{% block content %}
+<!-- card template from bootstrap: https://getbootstrap.com/docs/5.0/components/card/#examples -->
+<div class="resource_cards" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;"  >
+<div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="/static/img/career.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Technology Industry-Specific Resources</h5>
+      <p class="card-text">This page will provide information on technology industry-specific opportunities, internships, and resources.</p>
+      <a href="https://careers.gmu.edu/technology" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
+    </div>
+  </div>
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="/static/img/career.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Engineering Industry-Specific Resources</h5>
+      <p class="card-text">This page will provide information on engineering industry-specific opportunities, internships, and resources.</p>
+      <a href="https://careers.gmu.edu/engineering" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
+    </div>
+  </div>
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="/static/img/career.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Data Science Industry-Specific Resources</h5>
+      <p class="card-text">This page will provide information on data science industry-specific opportunities, internships, and resources.</p>
+      <a href="https://careers.gmu.edu/data-science" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
+    </div>
+  </div>
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="/static/img/career.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"> Create a Resume</h5>
+      <p class="card-text"> This page will provide guidance and resources for creating a professional resume. </p>
+      <a href="https://careers.gmu.edu/create-resume" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
+    </div>
+  </div>
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="/static/img/career.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"> Find a Job or Internship</h5>
+      <p class="card-text"> This page will provide information on job and internship opportunities, as well as resources for the application process. </p>
+      <a href="https://careers.gmu.edu/find-job-or-internship" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
+    </div>
+  </div>
+</div>
+  
+{% endblock %}
+
+{% block js %}
+<script>
+// Favorites toggle (uses localStorage)
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.favorite-toggle').forEach(function(el){
+    const title = el.closest('.card').querySelector('.card-title').textContent.trim();
+    const favs = JSON.parse(localStorage.getItem('career-favorites')||'{}');
+    if (favs[title]) { el.classList.add('favorited'); el.textContent = '♥'; }
+    el.addEventListener('click', function(){
+      const favs = JSON.parse(localStorage.getItem('career-favorites')||'{}');
+      this.classList.toggle('favorited');
+      if (this.classList.contains('favorited')) { this.textContent='♥'; favs[title]=true; }
+      else { this.textContent='♡'; delete favs[title]; }
+      localStorage.setItem('career-favorites', JSON.stringify(favs));
+    });
+  });
+});
+</script>
+{% endblock %}

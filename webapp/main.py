@@ -23,6 +23,24 @@ def academicResource():
     """Academic resource page"""
     return render_template('academicResources.html')
 
+@main_bp.route('/dining')
+@login_required
+def dining():
+    """Dining and food resources page"""
+    return render_template('dining.html')
+
+@main_bp.route('/wellness-resources')
+@login_required
+def wellness_resources():
+    """Wellness resources page"""
+    return render_template('wellnessResources.html')
+
+@main_bp.route('/career-internship-resources')
+@login_required
+def career_internship_resources():
+    """Career and internship resources page"""
+    return render_template('careerInternResources.html')
+
 
 if __name__ == '__main__':
     app = create_app()

@@ -1,0 +1,218 @@
+body {
+    background-color: #f8f9fa;
+}
+
+/* Wellness Banner */
+.wellness-banner {
+    background: linear-gradient(135deg, #1d6f2b 0%, #28a745 60%, #20c997 100%);
+    text-align: center;
+    padding: 2rem 0.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: visible;
+}
+
+.wellness-banner::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    max-width: 620px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    filter: blur(8px);
+    z-index: 0;
+}
+
+.wellness-banner-box {
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem 1rem;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 24px;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.1);
+}
+
+.banner-tag {
+    display: inline-block;
+    padding: 0.35rem 0.9rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #155724;
+    background: rgba(40, 167, 69, 0.12);
+    border-radius: 999px;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.wellness-banner h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.7px;
+    color: #1e3f20;
+}
+
+.wellness-banner p {
+    font-size: 1rem;
+    opacity: 0.95;
+    margin: 0;
+    font-weight: 500;
+    color: #3a4f3a;
+}
+/* Card grid container */
+.resource_cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 1rem;
+    margin: 0 auto 3rem;
+    max-width: 1180px;
+}
+
+/* Enhance card styling */
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background: white;
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+    position: relative;
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 16px 32px rgba(40, 167, 69, 0.15);
+    border-top: 4px solid #28a745;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #28a745, #20c997);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card-img-top {
+    border-radius: 16px 16px 0 0;
+    object-fit: cover;
+    height: 200px;
+    transition: transform 0.35s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.08);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    color: #1e7e34;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    letter-spacing: 0.2px;
+}
+
+.card-text {
+    color: #666;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+}
+
+/* Button styling */
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 2px 6px rgba(40, 167, 69, 0.2);
+}
+
+.btn-success:hover {
+    background-color: #1e7e34;
+    box-shadow: 0 6px 16px rgba(40, 167, 69, 0.35);
+    transform: translateY(-2px);
+}
+
+.btn-success:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.25);
+}
+
+/* Favorites styling */
+.favorite-toggle {
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    color: #ddd;
+    user-select: none;
+    display: inline-block;
+}
+
+.favorite-toggle:hover {
+    color: #e63946;
+    transform: scale(1.2);
+}
+
+.favorite-toggle.favorited {
+    color: #e63946;
+    animation: heartBeat 0.3s ease;
+}
+
+@keyframes heartBeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+}

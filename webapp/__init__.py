@@ -32,7 +32,11 @@ def create_app():
     
     from webapp.main import main_bp
     app.register_blueprint(main_bp)
+    init_db(app)
     
+    return app
+
+def init_db(app):
     # Create database tables
     with app.app_context():
             try:
@@ -40,5 +44,3 @@ def create_app():
             except Exception as e:
                 print(f"Warning: Could not initialize database: {e}")
                 print("Continuing without database. Some features may not work.")
-    
-    return app

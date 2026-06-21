@@ -8,50 +8,74 @@
 {% block content %}
 <!-- card template from bootstrap: https://getbootstrap.com/docs/5.0/components/card/#examples -->
 <div class="resource_cards" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;"  >
-<div class="card_mathTutoring" style="width: 15rem;">
+<div class="card" style="width: 15rem;">
     <img class="card-img-top" src="/static/img/erone-stuff-BAchx1hvFiw-unsplash.jpg" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">Math Tutoring</h5>
       <p class="card-text">This page will provide tutoring bookings, math tutorials, and information on Matlab.</p>
       <a href="https://science.gmu.edu/academics/departments-units/mathematical-sciences/math-tutoring" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
     </div>
   </div>
 
-  <div class="card_writing" style="width: 15rem;">
+  <div class="card" style="width: 15rem;">
     <img class="card-img-top" src="/static/img/erone-stuff-JJq8SUNWTcA-unsplash.jpg" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">The Writing Center</h5>
       <p class="card-text">This page will direct student on getting help for their writing works.  </p>
       <a href="https://writingcenter.gmu.edu/" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
     </div>
   </div>
 
-  <div class="card_comm" style="width: 15rem;">
+  <div class="card" style="width: 15rem;">
     <img class="card-img-top" src="/static/img/erone-stuff-SNr5sWUogSM-unsplash.jpg" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">The Communication Center</h5>
       <p class="card-text">Page to provide students with public speaking and communication skills</p>
       <a href="https://communicationcenter.gmu.edu/" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
     </div>
   </div>
 
-  <div class="card_academCoach" style="width: 15rem;">
+  <div class="card" style="width: 15rem;">
     <img class="card-img-top" src="/static/img/erone-stuff-UpG6FwIgVvk-unsplash.jpg" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title"> Academic Coaching Program</h5>
       <p class="card-text"> The Learning Services page will assist student in setting appointments up with their academic coach, as well as offer workshop and tutoring services. </p>
       <a href="https://learningservices.gmu.edu/" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
     </div>
   </div>
 
-  <div class="card_multLingual" style="width: 15rem;">
+  <div class="card" style="width: 15rem;">
     <img class="card-img-top" src="/static/img/alghozy-KBMDNdZ_3_A-unsplash.jpg" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title"> Learning Resources for Multilingual Students</h5>
       <p class="card-text"> The Learning Resource Center page will assist multilingual student in learning english by providing group work enviornment, tutoring, workshops, and tests. </p>
       <a href="https://intomason.gmu.edu/current-students/learning-resource-center" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
     </div>
   </div>
 </div>
   
-  {% endblock %}
+{% endblock %}
+{% block js %}
+<script>
+// Favorites toggle (uses localStorage)
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.favorite-toggle').forEach(function(el){
+    const title = el.closest('.card').querySelector('.card-title').textContent.trim();
+    const favs = JSON.parse(localStorage.getItem('academic-favorites')||'{}');
+    if (favs[title]) { el.classList.add('favorited'); el.textContent = '♥'; }
+    el.addEventListener('click', function(){
+      const favs = JSON.parse(localStorage.getItem('academic-favorites')||'{}');
+      this.classList.toggle('favorited');
+      if (this.classList.contains('favorited')) { this.textContent='♥'; favs[title]=true; }
+      else { this.textContent='♡'; delete favs[title]; }
+      localStorage.setItem('academic-favorites', JSON.stringify(favs));
+    });
+  });
+});
+</script>
+{% endblock %}

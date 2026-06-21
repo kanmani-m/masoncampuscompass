@@ -173,6 +173,54 @@ class SavedResource(db.Model):
     )
 
 
+class Favorite(db.Model):
+    __tablename__ = 'favorites'
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id'),
+        nullable=False
+    )
+
+    resource_id = db.Column(
+        db.String(100),
+        nullable=False
+    )
+
+    resource_type = db.Column(
+        db.String(50),
+        default='dining'
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        default=db.func.current_timestamp()
+    )
+
+    user = db.relationship(
+        'User',
+        backref=db.backref(
+            'favorites',
+            lazy=True,
+            cascade='all, delete-orphan'
+        )
+    )
+
+    __table_args__ = (
+        db.UniqueConstraint(
+            'user_id',
+            'resource_id',
+            'resource_type',
+            name='uq_user_resource_type'
+        ),
+    )
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))

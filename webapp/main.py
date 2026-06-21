@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, jsonify
 from flask_login import login_required, current_user
-from webapp import create_app
+from webapp import create_app, db
+from webapp.models import Favorite
 
 main_bp = Blueprint('main', __name__)
 
@@ -15,7 +16,37 @@ def index():
 @login_required
 def dashboard():
     """Dashboard - only accessible when logged in"""
-    return render_template('dashboard.html', username=current_user.username)
+    # Get user's favorite dining resources
+    dining_favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='dining'
+    ).all()
+    
+    # Create a mapping of favorite IDs to display names
+    favorite_map = {
+        'dining_locations': {
+            'name': 'Dining Halls & Locations',
+            'icon': '📍',
+            'url': 'https://new.dineoncampus.com/GMU/campus-map'
+        },
+        'meal_plans': {
+            'name': 'Meal Plans',
+            'icon': '💳',
+            'url': 'https://new.dineoncampus.com/GMU/find-your-perfect-meal-plan'
+        },
+        'patriot_pantry': {
+            'name': 'Patriot Pantry',
+            'icon': '🤝',
+            'url': 'https://ssac.gmu.edu/patriot-pantry/'
+        }
+    }
+    
+    favorites_display = []
+    for fav in dining_favorites:
+        if fav.resource_id in favorite_map:
+            favorites_display.append(favorite_map[fav.resource_id])
+    
+    return render_template('dashboard.html', username=current_user.username, favorites=favorites_display)
 
 @main_bp.route('/academicResource')
 @login_required
@@ -27,7 +58,53 @@ def academicResource():
 @login_required
 def dining():
     """Dining and food resources page"""
-    return render_template('dining.html')
+    # Get user's favorite dining resources
+    favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='dining'
+    ).all()
+    favorite_ids = [fav.resource_id for fav in favorites]
+    
+    return render_template('dining.html', favorite_ids=favorite_ids)
+
+@main_bp.route('/add_favorite', methods=['POST'])
+@login_required
+def add_favorite():
+    """Add or remove a favorite resource"""
+    data = request.get_json()
+    resource_id = data.get('resource_id')
+    resource_type = data.get('resource_type', 'dining')
+    
+    if not resource_id:
+        return jsonify({'success': False, 'message': 'Resource ID is required'}), 400
+    
+    # Check if already favorited
+    existing = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_id=resource_id,
+        resource_type=resource_type
+    ).first()
+    
+    try:
+        if existing:
+            # Remove favorite
+            db.session.delete(existing)
+            message = 'Removed from favorites'
+        else:
+            # Add favorite
+            favorite = Favorite(
+                user_id=current_user.id,
+                resource_id=resource_id,
+                resource_type=resource_type
+            )
+            db.session.add(favorite)
+            message = 'Added to favorites'
+        
+        db.session.commit()
+        return jsonify({'success': True, 'message': message})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'message': str(e)}), 500
 
 @main_bp.route('/wellness-resources')
 @login_required

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block styles %}
+{% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/academicResources.css') }}">
 {% endblock %}
 
@@ -7,6 +7,7 @@
 
 {% block content %}
 <!-- card template from bootstrap: https://getbootstrap.com/docs/5.0/components/card/#examples -->
+
 <div class="resource_cards" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;"  >
 <div class="card" style="width: 15rem;">
     <img class="card-img-top" src="/static/img/erone-stuff-BAchx1hvFiw-unsplash.jpg" alt="Card image cap">
@@ -58,14 +59,61 @@
     </div>
   </div>
 
-  <div class="card_onlineLearning" style="width: 15rem;">
+  <div class="card" style="width: 15rem;">
     <img class="card-img-top" src="/static/img/erone-stuff-BAchx1hvFiw-unsplash.jpg" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title"> Learning Resources for Online Students</h5>
       <p class="card-text"> The Online Learning page will assist online students by providing guides on time management, class types, and tips for being a succsessful online learner.  </p>
       <a href="https://learningservices.gmu.edu/learning-resources/online-learning/" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
     </div>
   </div>
+
+  <!-- xxx -->
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="/static/img/erone-stuff-JJq8SUNWTcA-unsplash.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Disability Services</h5>
+      <p class="card-text">This page offers services designed to support students with disabilities, to help create a more inclusive and supportive learning environment.</p>
+      <a href="https://ds.gmu.edu/" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
+    </div>
+  </div>
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="/static/img/erone-stuff-SNr5sWUogSM-unsplash.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"> GMU Library Hub </h5>
+      <p class="card-text"> The GMU Library page provides information on literary works, links to online databases, and hours for the library to study at. </p>
+      <a href="https://library.gmu.edu/" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
+    </div>
+  </div>
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="/static/img/erone-stuff-UpG6FwIgVvk-unsplash.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"> First-Year GMU Student Advising</h5>
+      <p class="card-text"> This page will provide helpful information to first-year students about academic advising, student resources, and important due-dates for classes.  </p>
+      <a href="https://advising.gmu.edu/firstyear/" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
+    </div>
+  </div>
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="/static/img/alghozy-KBMDNdZ_3_A-unsplash.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Transfer-Student Advising</h5>
+      <p class="card-text"> The Transfer-Student Advising page has resources for transfer student to help them settle in the new atmosphere, as well as, provide information about how to continue their degree at Mason. </p>
+      <a href="https://advising.gmu.edu/transferstudents/" target="_blank" class="btn btn-primary">Click to view page</a>
+      <span class="favorite-toggle ms-2">♡</span>
+    </div>
+  </div>
+
+
+
+  
 </div>
   <!-- end resource cards -->
 </div>

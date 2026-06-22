@@ -121,13 +121,6 @@ def favorites():
         if fav.resource_id in favorite_map:
             favorites_display.append(favorite_map[fav.resource_id])
 
-<<<<<<< HEAD
-    interests_display = []
-    
-    
-    
-    return render_template('dashboard.html', username=current_user.username, favorites=favorites_display, interests=interests)
-=======
     #wellness
     for fav in wellness_favorites:
         if fav.resource_id in favorite_map:
@@ -145,7 +138,6 @@ def favorites():
 def dashboard_redirect():
     """Legacy dashboard route kept for backward compatibility."""
     return redirect(url_for('main.favorites'))
->>>>>>> 3ef41e6a69df63d693be550f62107160347b0ef7
 
 @main_bp.route('/academicResource')
 @login_required

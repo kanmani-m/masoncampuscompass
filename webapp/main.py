@@ -22,8 +22,15 @@ def dashboard():
         resource_type='dining'
     ).all()
     
+    # Get user's favorite career resources
+    career_favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='career'
+    ).all()
+
     # Create a mapping of favorite IDs to display names
     favorite_map = {
+        #dining resources
         'dining_locations': {
             'name': 'Dining Halls & Locations',
             'icon': '📍',
@@ -38,13 +45,46 @@ def dashboard():
             'name': 'Patriot Pantry',
             'icon': '🤝',
             'url': 'https://ssac.gmu.edu/patriot-pantry/'
-        }
+        },
+
+        #career resources
+        'technology_resources': {
+            'name': 'Tech Industry Resources',
+            'icon': '💼',
+            'url': 'https://careers.gmu.edu/technology'
+        },
+        'engineering_resources': {
+            'name': 'Engineering Industry Resources',
+            'icon': '💼',
+            'url': 'https://careers.gmu.edu/engineering'
+        },
+        'data_science_resources': {
+            'name': 'Data Science Industry Resources',
+            'icon': '💼',
+            'url': 'https://careers.gmu.edu/data-science'
+        },       
+        'create_resume': {
+            'name': 'Create a Resume',
+            'icon': '💼',
+            'url': 'https://careers.gmu.edu/create-resume'
+        },
+        'find_job': {
+            'name': 'Find a Job',
+            'icon': '💼',
+            'url': 'https://careers.gmu.edu/find-job-or-internship'
+        }  
     }
     
     favorites_display = []
+    #dining
     for fav in dining_favorites:
         if fav.resource_id in favorite_map:
             favorites_display.append(favorite_map[fav.resource_id])
+    #career
+    for fav in career_favorites:
+        if fav.resource_id in favorite_map:
+            favorites_display.append(favorite_map[fav.resource_id])
+    
     
     return render_template('dashboard.html', username=current_user.username, favorites=favorites_display)
 
@@ -134,7 +174,14 @@ def wellness_resources():
 @login_required
 def career_internship_resources():
     """Career and internship resources page"""
-    return render_template('careerInternResources.html')
+    # Get user's favorite career resources
+    favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='career'
+    ).all()
+    favorite_ids = [fav.resource_id for fav in favorites]
+    
+    return render_template('careerInternResources.html', favorite_ids=favorite_ids)
 
 
 

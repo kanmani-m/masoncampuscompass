@@ -87,7 +87,7 @@ def favorites():
             favorites_display.append(favorite_map[fav.resource_id])
     
     
-    return render_template('dashboard.html', username=current_user.username, favorites=favorites_display, interests=interests)
+    return render_template('favorites.html', username=current_user.username, favorites=favorites_display, interests=interests)
 
 
 @main_bp.route('/dashboard')

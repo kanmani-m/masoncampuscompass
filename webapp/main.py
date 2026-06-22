@@ -17,6 +17,7 @@ def index():
 def dashboard():
     """Dashboard - only accessible when logged in"""
     interests = current_user.interests
+
     # Get user's favorite dining resources
     dining_favorites = Favorite.query.filter_by(
         user_id=current_user.id,
@@ -85,6 +86,9 @@ def dashboard():
     for fav in career_favorites:
         if fav.resource_id in favorite_map:
             favorites_display.append(favorite_map[fav.resource_id])
+
+    interests_display = []
+    
     
     
     return render_template('dashboard.html', username=current_user.username, favorites=favorites_display, interests=interests)

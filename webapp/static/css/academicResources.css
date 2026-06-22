@@ -3,6 +3,9 @@
     padding: 30;
 
 } */
+/* .container-fluid{
+    background-color: #fcf1c6;
+} */
 
 /* card style from carolina */
 .card {
@@ -29,7 +32,7 @@
 }
 
 .card-img-top {
-    filter: hue-rotate(30deg);
+    filter: hue-rotate(-90deg);
 }
 
 .resource_cards {
@@ -46,5 +49,17 @@
     text-align: center;
     border-radius: 10px;
     padding: 20px;
+    text-shadow: 4px 4px 6px rgba(105, 246, 138, 0.75);
+    ;
 
+}
+
+.favorite-toggle.ms-2 {
+    color: rgb(236, 201, 0);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.favorite-toggle:hover {
+    color: #e63946;
 }

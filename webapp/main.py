@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from webapp import create_app, db
 from webapp.models import Favorite
@@ -12,10 +12,10 @@ def index():
     return render_template('index.html')
 
 
-@main_bp.route('/dashboard')
+@main_bp.route('/favorites')
 @login_required
-def dashboard():
-    """Dashboard - only accessible when logged in"""
+def favorites():
+    """Favorites page - only accessible when logged in"""
     interests = current_user.interests
     # Get user's favorite dining resources
     dining_favorites = Favorite.query.filter_by(
@@ -124,6 +124,13 @@ def dashboard():
             favorites_display.append(favorite_map[fav.resource_id])
 
     return render_template('dashboard.html', username=current_user.username, favorites=favorites_display, interests=interests)
+
+
+@main_bp.route('/dashboard')
+@login_required
+def dashboard_redirect():
+    """Legacy dashboard route kept for backward compatibility."""
+    return redirect(url_for('main.favorites'))
 
 @main_bp.route('/academicResource')
 @login_required

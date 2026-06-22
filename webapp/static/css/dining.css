@@ -48,9 +48,10 @@
 }
 
 .header-icon {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
 /* Section Styling */

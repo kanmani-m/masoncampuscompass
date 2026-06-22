@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard - GMU Campus Compass{% endblock %}
+{% block title %}Favorites - GMU Campus Compass{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <h1 class="card-title">Hi {{ username }}! 👋</h1>
-                <p class="card-text lead">Welcome to your dashboard.</p>
+                <p class="card-text lead">Welcome to your favorites page.</p>
                 <hr>
                 
                 <!-- Favorites Section -->
@@ -36,7 +36,7 @@
                 {% else %}
                 <div class="alert alert-info mt-4" role="alert">
                     <h4 class="alert-heading">No Favorites Yet</h4>
-                    <p>Start adding your favorite resources! Visit the <a href="{{ url_for('main.dining') }}">Dining page</a> and click the heart button on any resource to add it to your favorites.</p>
+                    <p>Start adding your favorite resources! Explore the available resources and click the heart button on any resource to add it to your favorites.</p>
                 </div>
                 {% endif %}
                 
@@ -91,6 +91,9 @@
     
     .card.border-success {
         border: 2px solid #28a745 !important;
+    }
+    .card{
+        border-radius: 15px;
     }
 </style>
 {% endblock %}

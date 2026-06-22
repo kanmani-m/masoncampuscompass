@@ -1,149 +1,351 @@
-{% extends "base.html" %}
-{% block css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/academicResources.css') }}">
-{% endblock %}
-
-{% block title %}Academic Resources at GMU{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/academicResources.css') }}"
+/>
+{% endblock %} {% block title %}Academic Resources at GMU{% endblock %} {% block
+content %}
 
 <div class="academic-banner">
-    <h1>📚 Academic Resources at GMU!</h1>
-    <p>Explore the diverse academic support services available to help students</p>
-  </div>
-
+  <h1>📚 Academic Resources at GMU!</h1>
+  <p>
+    Explore the diverse academic support services available to help students
+  </p>
+</div>
 
 <!-- card template from bootstrap: https://getbootstrap.com/docs/5.0/components/card/#examples -->
 
-<div class="resource_cards"   >
-<div class="card" style="width: 15rem;">
-    <img class="card-img-top" src="/static/img/erone-stuff-BAchx1hvFiw-unsplash.jpg" alt="Card image cap">
+<div class="resource_cards">
+  <div class="card" style="width: 15rem">
+    <img
+      class="card-img-top"
+      src="/static/img/erone-stuff-BAchx1hvFiw-unsplash.jpg"
+      alt="Card image cap"
+    />
     <div class="card-body">
       <h5 class="card-title">Math Tutoring</h5>
-      <p class="card-text">This page will provide tutoring bookings, math tutorials, and information on Matlab.</p>
-      <a href="https://science.gmu.edu/academics/departments-units/mathematical-sciences/math-tutoring" target="_blank" class="btn btn-primary">Click to view page</a>
-      <span class="favorite-toggle ms-2">♡</span>
+      <p class="card-text">
+        This page will provide tutoring bookings, math tutorials, and
+        information on Matlab.
+      </p>
+      <div class="card-actions">
+        <a
+          href="https://science.gmu.edu/academics/departments-units/mathematical-sciences/math-tutoring"
+          target="_blank"
+          class="btn btn-primary"
+          >Click to view page</a
+        >
+        <button
+          class="btn-heart {% if 'academicResource1' in favorite_ids %}active{% endif %}"
+          onclick="toggleFavorite(this, 'academicResource1')"
+        >
+          {% if 'academicResource1' in favorite_ids %}♥{% else %}♡{% endif %}
+        </button>
+      </div>
     </div>
   </div>
 
-  <div class="card" style="width: 15rem;">
-    <img class="card-img-top" src="/static/img/erone-stuff-JJq8SUNWTcA-unsplash.jpg" alt="Card image cap">
+  <div class="card" style="width: 15rem">
+    <img
+      class="card-img-top"
+      src="/static/img/erone-stuff-JJq8SUNWTcA-unsplash.jpg"
+      alt="Card image cap"
+    />
     <div class="card-body">
       <h5 class="card-title">The Writing Center</h5>
-      <p class="card-text">This page will direct student on getting help for their writing works.  </p>
-      <a href="https://writingcenter.gmu.edu/" target="_blank" class="btn btn-primary">Click to view page</a>
-      <span class="favorite-toggle ms-2">♡</span>
+      <p class="card-text">
+        This page will direct student on getting help for their writing works.
+      </p>
+      <div class="card-actions">
+        <a
+          href="https://writingcenter.gmu.edu/"
+          target="_blank"
+          class="btn btn-primary"
+          >Click to view page</a
+        >
+        <button
+          class="btn-heart {% if 'academicResource2' in favorite_ids %}active{% endif %}"
+          onclick="toggleFavorite(this, 'academicResource2')"
+        >
+          {% if 'academicResource2' in favorite_ids %}♥{% else %}♡{% endif %}
+        </button>
+      </div>
     </div>
   </div>
 
-  <div class="card" style="width: 15rem;">
-    <img class="card-img-top" src="/static/img/erone-stuff-SNr5sWUogSM-unsplash.jpg" alt="Card image cap">
+  <div class="card" style="width: 15rem">
+    <img
+      class="card-img-top"
+      src="/static/img/erone-stuff-SNr5sWUogSM-unsplash.jpg"
+      alt="Card image cap"
+    />
     <div class="card-body">
       <h5 class="card-title">The Communication Center</h5>
-      <p class="card-text">Page to provide students with public speaking and communication skills</p>
-      <a href="https://communicationcenter.gmu.edu/" target="_blank" class="btn btn-primary">Click to view page</a>
-      <span class="favorite-toggle ms-2">♡</span>
+      <p class="card-text">
+        Page to provide students with public speaking and communication skills
+      </p>
+      <div class="card-actions">
+        <a
+          href="https://communicationcenter.gmu.edu/"
+          target="_blank"
+          class="btn btn-primary"
+          >Click to view page</a
+        >
+        <button
+          class="btn-heart {% if 'academicResource3' in favorite_ids %}active{% endif %}"
+          onclick="toggleFavorite(this, 'academicResource3')"
+        >
+          {% if 'academicResource3' in favorite_ids %}♥{% else %}♡{% endif %}
+        </button>
+      </div>
     </div>
   </div>
 
-  <div class="card" style="width: 15rem;">
-    <img class="card-img-top" src="/static/img/erone-stuff-UpG6FwIgVvk-unsplash.jpg" alt="Card image cap">
+  <div class="card" style="width: 15rem">
+    <img
+      class="card-img-top"
+      src="/static/img/erone-stuff-UpG6FwIgVvk-unsplash.jpg"
+      alt="Card image cap"
+    />
     <div class="card-body">
-      <h5 class="card-title"> Academic Coaching Program</h5>
-      <p class="card-text"> The Learning Services page will assist student in setting appointments up with their academic coach, as well as offer workshop and tutoring services. </p>
-      <a href="https://learningservices.gmu.edu/" target="_blank" class="btn btn-primary">Click to view page</a>
-      <span class="favorite-toggle ms-2">♡</span>
+      <h5 class="card-title">Academic Coaching Program</h5>
+      <p class="card-text">
+        The Learning Services page will assist student in setting appointments
+        up with their academic coach, as well as offer workshop and tutoring
+        services.
+      </p>
+      <div class="card-actions">
+        <a
+          href="https://learningservices.gmu.edu/"
+          target="_blank"
+          class="btn btn-primary"
+          >Click to view page</a
+        >
+        <button
+          class="btn-heart {% if 'academicResource4' in favorite_ids %}active{% endif %}"
+          onclick="toggleFavorite(this, 'academicResource4')"
+        >
+          {% if 'academicResource4' in favorite_ids %}♥{% else %}♡{% endif %}
+        </button>
+      </div>
     </div>
   </div>
 
-  <div class="card" style="width: 15rem;">
-    <img class="card-img-top" src="/static/img/alghozy-KBMDNdZ_3_A-unsplash.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title"> Learning Resources for Multilingual Students</h5>
-      <p class="card-text"> The Learning Resource Center page will assist multilingual students in learning english by providing group work enviornment, tutoring, workshops, and tests. </p>
-      <a href="https://intomason.gmu.edu/current-students/learning-resource-center" target="_blank" class="btn btn-primary">Click to view page</a>
-      <span class="favorite-toggle ms-2">♡</span>
+    <div class="card" style="width: 15rem">
+      <img
+        class="card-img-top"
+        src="/static/img/alghozy-KBMDNdZ_3_A-unsplash.jpg"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title">Learning Resources for Multilingual Students</h5>
+        <p class="card-text">
+          The Learning Resource Center page will assist multilingual students in
+          learning english by providing group work enviornment, tutoring,
+          workshops, and tests.
+        </p>
+        <div class="card-actions">
+          <a
+            href="https://intomason.gmu.edu/current-students/learning-resource-center"
+            target="_blank"
+            class="btn btn-primary"
+            >Click to view page</a
+          >
+          <button
+            class="btn-heart {% if 'academicResource5' in favorite_ids %}active{% endif %}"
+            onclick="toggleFavorite(this, 'academicResource5')"
+          >
+            {% if 'academicResource5' in favorite_ids %}♥{% else %}♡{% endif %}
+          </button>
+        </div>
+      </div>
+    </div>
+
+      <div class="card" style="width: 15rem">
+        <img
+          class="card-img-top"
+          src="/static/img/erone-stuff-BAchx1hvFiw-unsplash.jpg"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Learning Resources for Online Students</h5>
+          <p class="card-text">
+            The Online Learning page will assist online students by providing
+            guides on time management, class types, and tips for being a
+            succsessful online learner.
+          </p>
+          <div class="card-actions">
+            <a
+              href="https://learningservices.gmu.edu/learning-resources/online-learning/"
+              target="_blank"
+              class="btn btn-primary"
+              >Click to view page</a
+            >
+            <button
+              class="btn-heart {% if 'academicResource6' in favorite_ids %}active{% endif %}"
+              onclick="toggleFavorite(this, 'academicResource6')"
+            >
+              {% if 'academicResource6' in favorite_ids %}♥{% else %}♡{% endif
+              %}
+            </button>
+          </div>
+        </div>
+      </div>
+
+        <!-- xxx -->
+
+        <div class="card" style="width: 15rem">
+          <img
+            class="card-img-top"
+            src="/static/img/erone-stuff-JJq8SUNWTcA-unsplash.jpg"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Disability Services</h5>
+            <p class="card-text">
+              This page offers services designed to support students with
+              disabilities, to help create a more inclusive and supportive
+              learning environment.
+            </p>
+            <div class="card-actions">
+              <a
+                href="https://ds.gmu.edu/"
+                target="_blank"
+                class="btn btn-primary"
+                >Click to view page</a
+              >
+              <button
+                class="btn-heart {% if 'academicResource7' in favorite_ids %}active{% endif %}"
+                onclick="toggleFavorite(this, 'academicResource7')"
+              >
+                {% if 'academicResource7' in favorite_ids %}♥{% else %}♡{% endif
+                %}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="width: 15rem">
+          <img
+            class="card-img-top"
+            src="/static/img/alghozy-KBMDNdZ_3_A-unsplash.jpg"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Transfer-Student Advising</h5>
+            <p class="card-text">
+              The Transfer-Student Advising page has resources for transfer
+              student to help them settle in the new atmosphere, as well as,
+              provide information about how to continue their degree at Mason.
+            </p>
+            <div class="card-actions">
+              <a
+                href="https://advising.gmu.edu/transferstudents/"
+                target="_blank"
+                class="btn btn-primary"
+                >Click to view page</a
+              >
+              <button
+                class="btn-heart {% if 'academicResource8' in favorite_ids %}active{% endif %}"
+                onclick="toggleFavorite(this, 'academicResource8')"
+              >
+                {% if 'academicResource8' in favorite_ids %}♥{% else %}♡{% endif
+                %}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="width: 15rem">
+          <img
+            class="card-img-top"
+            src="/static/img/erone-stuff-UpG6FwIgVvk-unsplash.jpg"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title">First-Year GMU Student Advising</h5>
+            <p class="card-text">
+              This page will provide helpful information to first-year students
+              about academic advising, student resources, and important
+              due-dates for classes.
+            </p>
+            <div class="card-actions">
+              <a
+                href="https://advising.gmu.edu/firstyear/"
+                target="_blank"
+                class="btn btn-primary"
+                >Click to view page</a
+              >
+              <button
+                class="btn-heart {% if 'academicResource9' in favorite_ids %}active{% endif %}"
+                onclick="toggleFavorite(this, 'academicResource9')"
+              >
+                {% if 'academicResource9' in favorite_ids %}♥{% else %}♡{% endif
+                %}
+              </button>
+            </div>
+          </div>
+        </div>
+
+          <div class="card" style="width: 15rem">
+            <img
+              class="card-img-top"
+              src="/static/img/erone-stuff-SNr5sWUogSM-unsplash.jpg"
+              alt="Card image cap"
+            />
+            <div class="card-body">
+              <h5 class="card-title">GMU Library Hub</h5>
+              <p class="card-text">
+                The GMU Library page provides information on literary works,
+                links to online databases, and hours for the library to study
+                at.
+              </p>
+              <div class="card-actions">
+                <a
+                  href="https://library.gmu.edu/"
+                  target="_blank"
+                  class="btn btn-primary"
+                  >Click to view page</a
+                >
+                <button
+                  class="btn-heart {% if 'academicResource10' in favorite_ids %}active{% endif %}"
+                  onclick="toggleFavorite(this, 'academicResource10')"
+                >
+                  {% if 'academicResource10' in favorite_ids %}♥{% else %}♡{%
+                  endif %}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+          <!-- end resource cards -->
+
+        <script>
+          function toggleFavorite(btn, resourceId) {
+            const isFavorited = btn.classList.contains("active");
+
+            fetch("/add_favorite", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                resource_id: resourceId,
+                resource_type: "academic",
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.success) {
+                  btn.classList.toggle("active");
+                  btn.textContent = isFavorited ? "♡" : "♥";
+                }
+              })
+              .catch((error) => console.error("Error:", error));
+          }
+        </script>
+        {% endblock %}
+      </div>
     </div>
   </div>
-
-  <div class="card" style="width: 15rem;">
-    <img class="card-img-top" src="/static/img/erone-stuff-BAchx1hvFiw-unsplash.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title"> Learning Resources for Online Students</h5>
-      <p class="card-text"> The Online Learning page will assist online students by providing guides on time management, class types, and tips for being a succsessful online learner.  </p>
-      <a href="https://learningservices.gmu.edu/learning-resources/online-learning/" target="_blank" class="btn btn-primary">Click to view page</a>
-      <span class="favorite-toggle ms-2">♡</span>
-    </div>
-  </div>
-
-  <!-- xxx -->
-
-  <div class="card" style="width: 15rem;">
-    <img class="card-img-top" src="/static/img/erone-stuff-JJq8SUNWTcA-unsplash.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Disability Services</h5>
-      <p class="card-text">This page offers services designed to support students with disabilities, to help create a more inclusive and supportive learning environment.</p>
-      <a href="https://ds.gmu.edu/" target="_blank" class="btn btn-primary">Click to view page</a>
-      <span class="favorite-toggle ms-2">♡</span>
-    </div>
-  </div>
-
-  <div class="card" style="width: 15rem;">
-    <img class="card-img-top" src="/static/img/alghozy-KBMDNdZ_3_A-unsplash.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Transfer-Student Advising</h5>
-      <p class="card-text"> The Transfer-Student Advising page has resources for transfer student to help them settle in the new atmosphere, as well as, provide information about how to continue their degree at Mason. </p>
-      <a href="https://advising.gmu.edu/transferstudents/" target="_blank" class="btn btn-primary">Click to view page</a>
-      <span class="favorite-toggle ms-2">♡</span>
-    </div>
-  </div>
-
-  <div class="card" style="width: 15rem;">
-    <img class="card-img-top" src="/static/img/erone-stuff-UpG6FwIgVvk-unsplash.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title"> First-Year GMU Student Advising</h5>
-      <p class="card-text"> This page will provide helpful information to first-year students about academic advising, student resources, and important due-dates for classes.  </p>
-      <a href="https://advising.gmu.edu/firstyear/" target="_blank" class="btn btn-primary">Click to view page</a>
-      <span class="favorite-toggle ms-2">♡</span>
-    </div>
-  </div>
-
-
-
-  <div class="card" style="width: 15rem;">
-    <img class="card-img-top" src="/static/img/erone-stuff-SNr5sWUogSM-unsplash.jpg" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title"> GMU Library Hub </h5>
-      <p class="card-text"> The GMU Library page provides information on literary works, links to online databases, and hours for the library to study at. </p>
-      <a href="https://library.gmu.edu/" target="_blank" class="btn btn-primary">Click to view page</a>
-      <span class="favorite-toggle ms-2">♡</span>
-    </div>
-  </div>
-
-  
 </div>
-  <!-- end resource cards -->
-</div>
-
-
-  
-{% endblock %}
-{% block js %}
-<script>
-// Favorites toggle (uses localStorage)
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelectorAll('.favorite-toggle').forEach(function(el){
-    const title = el.closest('.card').querySelector('.card-title').textContent.trim();
-    const favs = JSON.parse(localStorage.getItem('academic-favorites')||'{}');
-    if (favs[title]) { el.classList.add('favorited'); el.textContent = '♥'; }
-    el.addEventListener('click', function(){
-      const favs = JSON.parse(localStorage.getItem('academic-favorites')||'{}');
-      this.classList.toggle('favorited');
-      if (this.classList.contains('favorited')) { this.textContent='♥'; favs[title]=true; }
-      else { this.textContent='♡'; delete favs[title]; }
-      localStorage.setItem('academic-favorites', JSON.stringify(favs));
-    });
-  });
-});
-</script>
-{% endblock %}

@@ -11,7 +11,7 @@ auth_bp = Blueprint('auth', __name__)
 def signup():
     """Handle user sign-up"""
     if current_user.is_authenticated:
-        return redirect(url_for('main.dashboard'))
+        return redirect(url_for('main.favorites'))
     
     interest_names = [
     "academic_resources",
@@ -56,7 +56,7 @@ def signup():
 def login():
     """Handle user login"""
     if current_user.is_authenticated:
-        return redirect(url_for('main.dashboard'))
+        return redirect(url_for('main.favorites'))
     
     form = LoginForm()
     if form.validate_on_submit():
@@ -67,7 +67,7 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user)
             flash(f'Welcome back, {user.username}!', 'success')
-            return redirect(url_for('main.dashboard'))
+            return redirect(url_for('main.favorites'))
         else:
             flash('Invalid username or password.', 'danger')
     

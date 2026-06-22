@@ -16,6 +16,7 @@ def index():
 @login_required
 def dashboard():
     """Dashboard - only accessible when logged in"""
+    interests = current_user.interests
     # Get user's favorite dining resources
     dining_favorites = Favorite.query.filter_by(
         user_id=current_user.id,
@@ -86,7 +87,7 @@ def dashboard():
             favorites_display.append(favorite_map[fav.resource_id])
     
     
-    return render_template('dashboard.html', username=current_user.username, favorites=favorites_display)
+    return render_template('dashboard.html', username=current_user.username, favorites=favorites_display, interests=interests)
 
 @main_bp.route('/academicResource')
 @login_required

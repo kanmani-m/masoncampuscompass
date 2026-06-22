@@ -13,11 +13,34 @@ def signup():
     if current_user.is_authenticated:
         return redirect(url_for('main.dashboard'))
     
+    interest_names = [
+    "academic_resources",
+    "dining_services",
+    "wellness_support",
+    "career_services",
+    "transportation",
+    "campus_events",
+    ]
+
+    for name in interest_names:
+        if not Interest.query.filter_by(name=name).first():
+            db.session.add(Interest(name=name))
+
+    db.session.commit()
+
     form = SignUpForm()
     if form.validate_on_submit():
+        selected_interests = form.interests.data
+        print(selected_interests)
         # Create new user
         user = User(username=form.username.data)
         user.set_password(form.password.data)
+
+        for interest_name in selected_interests:
+            interest = Interest.query.filter_by(name=interest_name).first()
+
+            if interest:
+                user.interests.append(interest)
         
         # Add to database
         db.session.add(user)

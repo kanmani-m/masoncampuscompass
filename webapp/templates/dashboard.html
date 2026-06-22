@@ -49,7 +49,33 @@
                     <a href="{{ url_for('main.wellness_resources') }}" class="btn btn-primary me-2">❤️ Wellness Resources</a>
                     <a href="{{ url_for('main.campus_events_clubs') }}" class="btn btn-primary">🎉 Campus Events</a>
                     <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Back to Home</a>
+                </div>
 
+                <div class="mt-5">
+                    <h3 class="mb-4">⭐ Your Interests</h3>
+
+                    {% if interests %}
+                    <div class="row">
+                        {% for interest in interests %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card border-primary h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        {{ interest.name.replace("_", " ").title() }}
+                                    </h5>
+                                    <p class="card-text">
+                                        Resources related to this category will be recommended to you.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="alert alert-secondary">
+                        You haven't selected any interests yet.
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

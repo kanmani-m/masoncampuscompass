@@ -56,6 +56,26 @@
                         {% endif %}
                     </div>
                     
+                    <hr class="my-4">
+
+                    <div class="mb-4">
+                        {{ form.interests.label(class="form-label fw-bold") }}
+                        <p class="text-muted small">
+                            Choose the topics you're interested in.
+                        </p>
+
+                        <div class="row">
+                            {% for subfield in form.interests %}
+                            <div class="col-md-6 mb-3">
+                                <div class="form-check form-switch">
+                                    {{ subfield(class="form-check-input") }}
+                                    {{ subfield.label(class="form-check-label") }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
                     <div class="d-grid mb-3">
                         {{ form.submit(class="btn btn-success btn-lg") }}
                     </div>

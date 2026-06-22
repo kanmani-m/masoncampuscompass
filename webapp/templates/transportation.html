@@ -21,28 +21,59 @@
     <div class="transportation-icon">🚌</div>
     <h2>GMU Transportation Services</h2>
     <p>Learn about biking, carpooling, Patriot Lift, airport transportation, SmarTrip, and public buses.</p>
-    <a href="https://transportation.gmu.edu/transportation-services/" target="_blank" class="transportation-btn">
-      Visit Site
-    </a>
+    <div class="card-actions">
+      <a href="https://transportation.gmu.edu/transportation-services/" target="_blank" class="transportation-btn"> Visit Site </a>
+      <button class="btn-heart {% if 'transportation_services' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'transportation_services')">{% if 'transportation_services' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
   </div>
 
   <div class="transportation-card">
     <div class="transportation-icon">🚙</div>
     <h2>Mason Commutes</h2>
     <p>Explore commute options and tools to help students travel to and from campus.</p>
-    <a href="https://www.masoncommutes.com/public/home.aspx" target="_blank" class="transportation-btn">
-      Visit Site
-    </a>
+    <div class="card-actions">
+      <a href="https://www.masoncommutes.com/public/home.aspx" target="_blank" class="transportation-btn">
+        Visit Site
+      </a>
+      <button class="btn-heart {% if 'mason_commutes' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'mason_commutes')">{% if 'mason_commutes' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
   </div>
 
   <div class="transportation-card">
     <div class="transportation-icon">🅿️</div>
     <h2>Parking Information</h2>
     <p>View parking options for resident and off-campus students, permits, fees, and parking maps.</p>
-    <a href="https://transportation.gmu.edu/parking/#ResidentStudents" target="_blank" class="transportation-btn">
-      Visit Site
-    </a>
+    <div class="card-actions">
+      <a href="https://transportation.gmu.edu/parking/#ResidentStudents" target="_blank" class="transportation-btn">
+        Visit Site
+      </a>
+      <button class="btn-heart {% if 'parking_information' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'parking_information')">{% if 'parking_information' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
   </div>
 
 </section>
+<script>
+    function toggleFavorite(btn, resourceId) {
+        const isFavorited = btn.classList.contains('active');
+        
+        fetch('/add_favorite', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                resource_id: resourceId,
+                resource_type: 'career'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                btn.classList.toggle('active');
+                btn.textContent = isFavorited ? '♡' : '♥';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
 {% endblock %}

@@ -40,6 +40,11 @@ def favorites():
         user_id=current_user.id,
         resource_type='academic'
     ).all()
+    # Get user's favorite transportation resources
+    transportation_favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='transportation'
+    ).all()
 
     # Create a mapping of favorite IDs to display names
     favorite_map = {
@@ -114,7 +119,7 @@ def favorites():
             'url': 'https://ssac.gmu.edu/'
         },
 
-        ####### academic resources
+        #academic resources
         'academicResource1': {
             'name': 'Math Tutoring',
             'icon': '📚',
@@ -166,8 +171,22 @@ def favorites():
             'url': 'https://library.gmu.edu/'
         }, 
 
-
-        ##end academic resource display#########
+        #transportation
+        'transportation_services': {
+            'name': 'GMU Transportation Services',
+            'icon': '🚌',
+            'url': 'https://transportation.gmu.edu/transportation-services/'
+        },
+        'mason_commutes': {
+            'name': 'Mason Commutes',
+            'icon': '🚙',
+            'url': 'https://www.masoncommutes.com/public/home.aspx'
+        },
+        'parking_information': {
+            'name': 'Parking Information',
+            'icon': '🅿️',
+            'url': 'https://transportation.gmu.edu/parking/#ResidentStudents'
+        }
     }
     
     favorites_display = []
@@ -188,6 +207,11 @@ def favorites():
 
     #academics
     for fav in academic_favorites:
+        if fav.resource_id in favorite_map:
+            favorites_display.append(favorite_map[fav.resource_id])
+
+    #transportation
+    for fav in transportation_favorites:
         if fav.resource_id in favorite_map:
             favorites_display.append(favorite_map[fav.resource_id])
     

@@ -67,6 +67,17 @@ def dining():
     
     return render_template('dining.html', favorite_ids=favorite_ids)
 
+
+
+# transportation route
+@main_bp.route('/transportation')
+@login_required
+def transportation():
+    """Transportation resources page"""
+    return render_template('transportation.html')
+
+
+
 @main_bp.route('/add_favorite', methods=['POST'])
 @login_required
 def add_favorite():
@@ -117,6 +128,7 @@ def wellness_resources():
 def career_internship_resources():
     """Career and internship resources page"""
     return render_template('careerInternResources.html')
+
 
 
 if __name__ == '__main__':

@@ -1,0 +1,43 @@
+<!-- Transportation page. AI helped with formatting and layout. -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/transportation.css') }}">
+
+<section class="transportation-hero">
+  <h1>🚗 Transportation Services</h1>
+  <p>Find transportation, commuting, parking, and travel resources at GMU.</p>
+</section>
+
+<section class="transportation-grid">
+
+  <div class="transportation-card">
+    <div class="transportation-icon">🚌</div>
+    <h2>GMU Transportation Services</h2>
+    <p>Learn about biking, carpooling, Patriot Lift, airport transportation, SmarTrip, and public buses.</p>
+    <a href="https://transportation.gmu.edu/transportation-services/" target="_blank" class="transportation-btn">
+      Visit Site
+    </a>
+  </div>
+
+  <div class="transportation-card">
+    <div class="transportation-icon">🚙</div>
+    <h2>Mason Commutes</h2>
+    <p>Explore commute options and tools to help students travel to and from campus.</p>
+    <a href="https://www.masoncommutes.com/public/home.aspx" target="_blank" class="transportation-btn">
+      Visit Site
+    </a>
+  </div>
+
+  <div class="transportation-card">
+    <div class="transportation-icon">🅿️</div>
+    <h2>Parking Information</h2>
+    <p>View parking options for resident and off-campus students, permits, fees, and parking maps.</p>
+    <a href="https://transportation.gmu.edu/parking/#ResidentStudents" target="_blank" class="transportation-btn">
+      Visit Site
+    </a>
+  </div>
+
+</section>
+{% endblock %}

@@ -2,19 +2,75 @@
 
 {% block title %}Home - GMU Campus Compass{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
 {% block content %}
-<div class="row">
-    <div class="col-md-8 offset-md-2 text-center">
-        <h1 class="mb-4">Welcome to GMU Campus Compass</h1>
-        <p class="lead mb-4">Your guide to navigating George Mason University</p>
-        
-        {% if current_user.is_authenticated %}
-            <div class="alert alert-info" role="alert">
-                <h4 class="alert-heading">Hi {{ current_user.username }}!</h4>
-                <p>Welcome back to Campus Compass. Ready to explore?</p>
-                <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+{% if current_user.is_authenticated %}
+    <div class="home-container">
+        <div class="home-header">
+            <h1>Welcome, {{ current_user.username }}! 👋</h1>
+            <p>Your Guide to George Mason University</p>
+        </div>
+
+        <div class="resources-grid">
+            <!-- Academic Resources -->
+            <div class="resource-box">
+                <div class="resource-icon">📚</div>
+                <h3>Academic Resources</h3>
+                <p>Find tutoring, writing centers, libraries, and academic support services.</p>
+                <a href="{{ url_for('main.academicResource') }}" class="resource-link">Explore →</a>
             </div>
-        {% else %}
+
+            <!-- Dining -->
+            <div class="resource-box">
+                <div class="resource-icon">🍽️</div>
+                <h3>Dining Services</h3>
+                <p>Dining halls, meal plans, retail dining options, and food pantry support.</p>
+                <a href="{{ url_for('main.dining') }}" class="resource-link">Explore →</a>
+            </div>
+
+            <!-- Wellness & Support -->
+            <div class="resource-box">
+                <div class="resource-icon">❤️</div>
+                <h3>Wellness & Support</h3>
+                <p>Health services, counseling, mental health support, and wellness resources.</p>
+                <a href="{{ url_for('main.wellness_resources') }}" class="resource-link">Explore →</a>
+            </div>
+
+            <!-- Career Services -->
+            <div class="resource-box">
+                <div class="resource-icon">💼</div>
+                <h3>Career Services</h3>
+                <p>Internships, job opportunities, resume help, and career guidance.</p>
+                <a href="{{ url_for('main.career_internship_resources') }}" class="resource-link">Explore →</a>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="resource-box">
+                <div class="resource-icon">📊</div>
+                <h3>Your Dashboard</h3>
+                <p>View your favorite resources, saved items, and personalized content.</p>
+                <a href="{{ url_for('main.dashboard') }}" class="resource-link">Explore →</a>
+            </div>
+
+            <!-- Student Support -->
+            <div class="resource-box">
+                <div class="resource-icon">🤝</div>
+                <h3>Student Support</h3>
+                <p>Accessibility services, student advocacy, and additional campus resources.</p>
+                <a href="#" class="resource-link" onclick="alert('Coming Soon!')">Explore →</a>
+            </div>
+        </div>
+    </div>
+
+{% else %}
+    <div class="row">
+        <div class="col-md-8 offset-md-2 text-center">
+            <h1 class="mb-4">Welcome to GMU Campus Compass</h1>
+            <p class="lead mb-4">Your guide to navigating George Mason University</p>
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
@@ -35,7 +91,7 @@
                     </div>
                 </div>
             </div>
-        {% endif %}
+        </div>
     </div>
-</div>
+{% endif %}
 {% endblock %}

@@ -198,6 +198,24 @@ body {
     display: inline-block;
 }
 
+.btn-heart {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: all 0.2s ease;
+    color: #ccc;
+}
+
+.btn-heart:hover {
+    transform: scale(1.2);
+}
+
+.btn-heart.active {
+    color: #e74c3c;
+}
+
 .favorite-toggle:hover {
     color: #e63946;
     transform: scale(1.2);

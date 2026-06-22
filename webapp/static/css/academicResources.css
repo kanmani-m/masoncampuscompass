@@ -1,3 +1,9 @@
+/* overwrite the big gap between continers */
+/* .container-fluid.mt-4 {
+    padding: 30;
+
+} */
+
 /* card style from carolina */
 .card {
     border: none;
@@ -15,7 +21,30 @@
     box-shadow: 0 0px 30px rgba(15, 161, 49, 0.75);
 }
 
-.btn{
-    
+.btn.btn-primary {
+    background-color: #0c561e;
+    color: rgb(255, 223, 42);
+    border-radius: 10px;
+    cursor: pointer;
 }
 
+.card-img-top {
+    filter: hue-rotate(30deg);
+}
+
+.resource_cards {
+    padding: 50px 0px;
+    gap: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.academic-banner {
+    background-color: #0c561e;
+    color: rgb(255, 223, 42);
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+
+}

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/academicResources.css') }}">
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/wellness.css') }}">
 {% endblock %}
 
@@ -26,7 +26,7 @@
       <h5 class="card-title">🏥 Student Health Services</h5>
       <p class="card-text">Medical appointments, immunizations, and health education for Mason students.</p>
       <a href="https://shs.gmu.edu/" target="_blank" class="btn btn-success">Visit site</a>
-      <span class="favorite-toggle ms-2">♡</span>
+      <button class="btn-heart {% if 'student_health_services' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'student_health_services')">{% if 'student_health_services' in favorite_ids %}♥{% else %}♡{% endif %}</button>
     </div>
   </div>
 
@@ -36,7 +36,7 @@
       <h5 class="card-title">💬 Counseling Services</h5>
       <p class="card-text">Confidential counseling, crisis support, and wellness workshops for students.</p>
       <a href="https://caps.gmu.edu/" target="_blank" class="btn btn-success">Visit site</a>
-      <span class="favorite-toggle ms-2">♡</span>
+      <button class="btn-heart {% if 'counseling_services' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'counseling_services')">{% if 'counseling_services' in favorite_ids %}♥{% else %}♡{% endif %}</button>
     </div>
   </div>
 
@@ -46,7 +46,7 @@
       <h5 class="card-title">🧠 Community Mental Health</h5>
       <p class="card-text">Support and resources for mental health and well-being in the community.</p>
       <a href="https://ccmh.gmu.edu/services/the-stepped-mental-health-care-program" target="_blank" class="btn btn-success">Visit site</a>
-      <span class="favorite-toggle ms-2">♡</span>
+      <button class="btn-heart {% if 'community_mental_health' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'community_mental_health')">{% if 'community_mental_health' in favorite_ids %}♥{% else %}♡{% endif %}</button>
     </div>
   </div>
 
@@ -56,7 +56,7 @@
       <h5 class="card-title">📝 Accessibility Services</h5>
       <p class="card-text">Disability accommodations, assistive technology, and academic access support.</p>
       <a href="https://www.gmu.edu/academics/accessibility-resources" target="_blank" class="btn btn-success">Visit site</a>
-      <span class="favorite-toggle ms-2">♡</span>
+      <button class="btn-heart {% if 'accessibility_services' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'accessibility_services')">{% if 'accessibility_services' in favorite_ids %}♥{% else %}♡{% endif %}</button>
     </div>
   </div>
 
@@ -66,7 +66,7 @@
       <h5 class="card-title">✊ Student Advocacy</h5>
       <p class="card-text">Help navigating student rights, academic appeals, and campus policy support.</p>
       <a href="https://ssac.gmu.edu/" target="_blank" class="btn btn-success">Visit site</a>
-      <span class="favorite-toggle ms-2">♡</span>
+      <button class="btn-heart {% if 'student_advocacy' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'student_advocacy')">{% if 'student_advocacy' in favorite_ids %}♥{% else %}♡{% endif %}</button>
     </div>
   </div>
 
@@ -76,30 +76,40 @@
       <h5 class="card-title">🧘 Mindful Workshops</h5>
       <p class="card-text">Mindfulness workshops and guided practice sessions. In person and online options available.</p>
       <a href="https://wellbeing.gmu.edu/events/" target="_blank" class="btn btn-success">Event details</a>
-      <span class="favorite-toggle ms-2">♡</span>
+      <button class="btn-heart {% if 'mindful_workshops' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'mindful_workshops')">{% if 'mindful_workshops' in favorite_ids %}♥{% else %}♡{% endif %}</button>
     </div>
   </div>
 
 </div>
 
-{% endblock %}
 
-{% block js %}
+
 <script>
-// Favorites toggle (uses localStorage)
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelectorAll('.favorite-toggle').forEach(function(el){
-    const title = el.closest('.card').querySelector('.card-title').textContent.trim();
-    const favs = JSON.parse(localStorage.getItem('wellness-favorites')||'{}');
-    if (favs[title]) { el.classList.add('favorited'); el.textContent = '♥'; }
-    el.addEventListener('click', function(){
-      const favs = JSON.parse(localStorage.getItem('wellness-favorites')||'{}');
-      this.classList.toggle('favorited');
-      if (this.classList.contains('favorited')) { this.textContent='♥'; favs[title]=true; }
-      else { this.textContent='♡'; delete favs[title]; }
-      localStorage.setItem('wellness-favorites', JSON.stringify(favs));
-    });
-  });
-});
+    function toggleFavorite(btn, resourceId) {
+        const isFavorited = btn.classList.contains('active');
+        
+        fetch('/add_favorite', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                resource_id: resourceId,
+                resource_type: 'wellness'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                btn.classList.toggle('active');
+                btn.textContent = isFavorited ? '♡' : '♥';
+            } else {
+                console.error('Error saving favorite:', data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
 </script>
 {% endblock %}
+
+

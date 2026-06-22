@@ -252,7 +252,7 @@ def favorites():
     for fav in transportation_favorites:
         if fav.resource_id in favorite_map:
             favorites_display.append(favorite_map[fav.resource_id])
-            
+
     #campus events and clubs
     for fav in campus_events_clubs_favorites:
         if fav.resource_id in favorite_map:
@@ -300,14 +300,24 @@ def dining():
 @login_required
 def transportation():
     """Transportation resources page"""
-    return render_template('transportation.html')
+    favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='transportation'
+    ).all()
+    favorite_ids = [fav.resource_id for fav in favorites]
+    return render_template('transportation.html', favorite_ids=favorite_ids)
 
 
 @main_bp.route('/campus-events-clubs')
 @login_required
 def campus_events_clubs():
     """Campus Events and Clubs page"""
-    return render_template('campusEventsClubs.html')
+    favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='campus_events_clubs'
+    ).all()
+    favorite_ids = [fav.resource_id for fav in favorites]
+    return render_template('campusEventsClubs.html', favorite_ids=favorite_ids)
 
 
 

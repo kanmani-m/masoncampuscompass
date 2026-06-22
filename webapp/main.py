@@ -46,6 +46,11 @@ def favorites():
         resource_type='transportation'
     ).all()
 
+    campus_events_clubs_favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='campus_events_clubs'
+    ).all()
+
     # Create a mapping of favorite IDs to display names
     favorite_map = {
         #dining resources
@@ -186,7 +191,40 @@ def favorites():
             'name': 'Parking Information',
             'icon': '🅿️',
             'url': 'https://transportation.gmu.edu/parking/#ResidentStudents'
+        },
+
+        #campus events and clubs
+        'mason360_student_orgs': {
+            'name': 'Mason360 – Student Orgs',
+            'icon': '🏛️',
+            'url': 'https://mason360.gmu.edu/organizations'
+        },
+        'upcoming_campus_events': {
+            'name': 'Upcoming Campus Events',
+            'icon': '📅',
+            'url': 'https://mason360.gmu.edu/events'
+        },
+        'center_for_student_involvement': {
+            'name': 'Center for Student Involvement',
+            'icon': '🎓',
+            'url': 'https://csi.gmu.edu/'
+        },
+        'intramural_recreation': {
+            'name': 'Intramural & Recreation',
+            'icon': '🏆',
+            'url': 'https://recsports.gmu.edu/programs/intramurals/'
+        },
+        'multicultural_events': {
+            'name': 'Multicultural Events',
+            'icon': '🌍',
+            'url': 'https://odime.gmu.edu/'
+        },
+        'student_government': {
+            'name': 'Student Government',
+            'icon': '📢',
+            'url': 'https://sga.gmu.edu/'
         }
+
     }
     
     favorites_display = []
@@ -214,7 +252,11 @@ def favorites():
     for fav in transportation_favorites:
         if fav.resource_id in favorite_map:
             favorites_display.append(favorite_map[fav.resource_id])
-    
+            
+    #campus events and clubs
+    for fav in campus_events_clubs_favorites:
+        if fav.resource_id in favorite_map:
+            favorites_display.append(favorite_map[fav.resource_id])
 
     return render_template(
         'favorites.html',

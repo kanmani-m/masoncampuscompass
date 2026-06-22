@@ -19,56 +19,93 @@
     <div class="events-icon">🏛️</div>
     <h2>Mason360 – Student Orgs</h2>
     <p>Browse and join over 500 student organizations at GMU. Find clubs that match your interests, major, or hobbies.</p>
-    <a href="https://mason360.gmu.edu/organizations" target="_blank" class="events-btn">
-      Explore Clubs
-    </a>
+    <div class="card-actions">
+      <a href="https://mason360.gmu.edu/organizations" target="_blank" class="events-btn"> Explore Clubs </a>
+      <button class="btn-heart {% if 'mason360_student_orgs' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'mason360_student_orgs')">{% if 'mason360_student_orgs' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
+
   </div>
 
   <div class="events-card">
     <div class="events-icon">📅</div>
     <h2>Upcoming Campus Events</h2>
     <p>Stay up to date with lectures, fairs, performances, and student-run events happening across GMU's campuses.</p>
-    <a href="https://mason360.gmu.edu/events" target="_blank" class="events-btn">
-      View Events
-    </a>
+    <div class="card-actions">
+      <a href="https://mason360.gmu.edu/events" target="_blank" class="events-btn"> View Events </a>
+      <button class="btn-heart {% if 'upcoming_campus_events' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'upcoming_campus_events')">{% if 'upcoming_campus_events' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
   </div>
 
   <div class="events-card">
     <div class="events-icon">🎓</div>
     <h2>Center for Student Involvement</h2>
     <p>The CSI supports student leadership, event planning, and organization management at Mason.</p>
-    <a href="https://csi.gmu.edu/" target="_blank" class="events-btn">
-      Visit CSI
-    </a>
+    <div class="card-actions">
+      <a href="https://csi.gmu.edu/" target="_blank" class="events-btn"> Visit CSI </a>
+      <button class="btn-heart {% if 'center_for_student_involvement' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'center_for_student_involvement')">{% if 'center_for_student_involvement' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
   </div>
 
   <div class="events-card">
     <div class="events-icon">🏆</div>
     <h2>Intramural & Recreation</h2>
     <p>Join intramural sports leagues, fitness classes, outdoor adventures, and recreational programs at GMU.</p>
-    <a href="https://recsports.gmu.edu/programs/intramurals/" target="_blank" class="events-btn">
-      Get Active
-    </a>
+    <div class="card-actions">
+      <a href="https://recsports.gmu.edu/programs/intramurals/" target="_blank" class="events-btn">
+        Get Active
+      </a>
+      <button class="btn-heart {% if 'intramural_recreation' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'intramural_recreation')">{% if 'intramural_recreation' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
   </div>
 
   <div class="events-card">
     <div class="events-icon">🌍</div>
     <h2>Multicultural Events</h2>
     <p>Explore cultural events and diversity-focused programs organized by Mason's Office of Diversity, Inclusion & Multicultural Education.</p>
-    <a href="https://odime.gmu.edu/" target="_blank" class="events-btn">
-      Learn More
-    </a>
+    <div class="card-actions">
+      <a href="https://odime.gmu.edu/" target="_blank" class="events-btn">
+        Learn More
+      </a>
+      <button class="btn-heart {% if 'multicultural_events' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'multicultural_events')">{% if 'multicultural_events' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
   </div>
 
   <div class="events-card">
     <div class="events-icon">📢</div>
     <h2>Student Government</h2>
     <p>Get involved in student governance, represent your peers, and make an impact on campus policy and life.</p>
-    <a href="https://sga.gmu.edu/" target="_blank" class="events-btn">
-      Visit SGA
-    </a>
+    <div class="card-actions">
+      <a href="https://sga.gmu.edu/" target="_blank" class="events-btn">
+        Visit SGA
+      </a>
+      <button class="btn-heart {% if 'student_government' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'student_government')">{% if 'student_government' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
   </div>
 
 </section>
 
+<script>
+    function toggleFavorite(btn, resourceId) {
+        const isFavorited = btn.classList.contains('active');
+        
+        fetch('/add_favorite', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                resource_id: resourceId,
+                resource_type: 'campus_events_clubs'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                btn.classList.toggle('active');
+                btn.textContent = isFavorited ? '♡' : '♥';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
 {% endblock %}

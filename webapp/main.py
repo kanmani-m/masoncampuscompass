@@ -115,7 +115,15 @@ def dining():
 @login_required
 def transportation():
     """Transportation resources page"""
-    return render_template('transportation.html')
+    favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='transportation'
+    ).all()
+    favorite_ids = [fav.resource_id for fav in favorites]
+
+    return render_template('transportation.html', favorite_ids=favorite_ids)
+
+
 
 
 @main_bp.route('/campus-events-clubs')

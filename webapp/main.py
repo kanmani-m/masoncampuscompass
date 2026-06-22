@@ -77,6 +77,13 @@ def transportation():
     return render_template('transportation.html')
 
 
+@main_bp.route('/campus-events-clubs')
+@login_required
+def campus_events_clubs():
+    """Campus Events and Clubs page"""
+    return render_template('campusEventsClubs.html')
+
+
 
 @main_bp.route('/add_favorite', methods=['POST'])
 @login_required

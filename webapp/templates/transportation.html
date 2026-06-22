@@ -2,8 +2,13 @@
 
 {% extends 'base.html' %}
 
-{% block content %}
+{% block title %}Transportation - GMU Campus Compass{% endblock %}
+
+{% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/transportation.css') }}">
+{% endblock %}
+
+{% block content %}
 
 <section class="transportation-hero">
   <h1>🚗 Transportation Services</h1>

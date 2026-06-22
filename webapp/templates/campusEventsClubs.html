@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Campus Events & Clubs - GMU Campus Compass{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/campusEventsClubs.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="events-hero">
+  <h1>🎉 Campus Events & Clubs</h1>
+  <p>Discover student organizations, upcoming events, and ways to get involved at George Mason University.</p>
+</section>
+
+<section class="events-grid">
+
+  <div class="events-card">
+    <div class="events-icon">🏛️</div>
+    <h2>Mason360 – Student Orgs</h2>
+    <p>Browse and join over 500 student organizations at GMU. Find clubs that match your interests, major, or hobbies.</p>
+    <a href="https://mason360.gmu.edu/organizations" target="_blank" class="events-btn">
+      Explore Clubs
+    </a>
+  </div>
+
+  <div class="events-card">
+    <div class="events-icon">📅</div>
+    <h2>Upcoming Campus Events</h2>
+    <p>Stay up to date with lectures, fairs, performances, and student-run events happening across GMU's campuses.</p>
+    <a href="https://mason360.gmu.edu/events" target="_blank" class="events-btn">
+      View Events
+    </a>
+  </div>
+
+  <div class="events-card">
+    <div class="events-icon">🎓</div>
+    <h2>Center for Student Involvement</h2>
+    <p>The CSI supports student leadership, event planning, and organization management at Mason.</p>
+    <a href="https://csi.gmu.edu/" target="_blank" class="events-btn">
+      Visit CSI
+    </a>
+  </div>
+
+  <div class="events-card">
+    <div class="events-icon">🏆</div>
+    <h2>Intramural & Recreation</h2>
+    <p>Join intramural sports leagues, fitness classes, outdoor adventures, and recreational programs at GMU.</p>
+    <a href="https://recsports.gmu.edu/programs/intramurals/" target="_blank" class="events-btn">
+      Get Active
+    </a>
+  </div>
+
+  <div class="events-card">
+    <div class="events-icon">🌍</div>
+    <h2>Multicultural Events</h2>
+    <p>Explore cultural events and diversity-focused programs organized by Mason's Office of Diversity, Inclusion & Multicultural Education.</p>
+    <a href="https://odime.gmu.edu/" target="_blank" class="events-btn">
+      Learn More
+    </a>
+  </div>
+
+  <div class="events-card">
+    <div class="events-icon">📢</div>
+    <h2>Student Government</h2>
+    <p>Get involved in student governance, represent your peers, and make an impact on campus policy and life.</p>
+    <a href="https://sga.gmu.edu/" target="_blank" class="events-btn">
+      Visit SGA
+    </a>
+  </div>
+
+</section>
+
+{% endblock %}

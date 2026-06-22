@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from webapp import create_app, db
 from webapp.models import Favorite
@@ -12,10 +12,10 @@ def index():
     return render_template('index.html')
 
 
-@main_bp.route('/dashboard')
+@main_bp.route('/favorites')
 @login_required
-def dashboard():
-    """Dashboard - only accessible when logged in"""
+def favorites():
+    """Favorites page - only accessible when logged in"""
     interests = current_user.interests
 
     # Get user's favorite dining resources
@@ -28,6 +28,12 @@ def dashboard():
     career_favorites = Favorite.query.filter_by(
         user_id=current_user.id,
         resource_type='career'
+    ).all()
+
+    # Get user's favorite wellness resources
+    wellness_favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='wellness'
     ).all()
 
     # Create a mapping of favorite IDs to display names
@@ -74,7 +80,34 @@ def dashboard():
             'name': 'Find a Job',
             'icon': '💼',
             'url': 'https://careers.gmu.edu/find-job-or-internship'
-        }  
+        },
+
+        #wellness resources
+        'student_health_services': {
+            'name': 'Student Health Services',
+            'icon': '🏥',
+            'url': 'https://shs.gmu.edu/'
+        },
+        'counseling_services': {
+            'name': 'Counseling and Psychological Services',
+            'icon': '💬',
+            'url': 'https://caps.gmu.edu/'
+        },
+        'community_mental_health': {
+            'name': 'Community Mental Health',
+            'icon': '🧠',
+            'url': 'https://ccmh.gmu.edu/services/the-stepped-mental-health-care-program'
+        },
+        'accessibility_services': {
+            'name': 'Accessibility Services',
+            'icon': '📝',
+            'url': 'https://www.gmu.edu/academics/accessibility-resources'
+        },
+        'student_advocacy': {
+            'name': 'Student Advocacy',
+            'icon': '✊',
+            'url': 'https://ssac.gmu.edu/'
+        },
     }
     
     favorites_display = []
@@ -82,16 +115,37 @@ def dashboard():
     for fav in dining_favorites:
         if fav.resource_id in favorite_map:
             favorites_display.append(favorite_map[fav.resource_id])
+
     #career
     for fav in career_favorites:
         if fav.resource_id in favorite_map:
             favorites_display.append(favorite_map[fav.resource_id])
 
+<<<<<<< HEAD
     interests_display = []
     
     
     
     return render_template('dashboard.html', username=current_user.username, favorites=favorites_display, interests=interests)
+=======
+    #wellness
+    for fav in wellness_favorites:
+        if fav.resource_id in favorite_map:
+            favorites_display.append(favorite_map[fav.resource_id])
+
+    return render_template(
+        'favorites.html',
+        username=current_user.username,
+        favorites=favorites_display,
+        interests=interests
+    )
+
+@main_bp.route('/dashboard')
+@login_required
+def dashboard_redirect():
+    """Legacy dashboard route kept for backward compatibility."""
+    return redirect(url_for('main.favorites'))
+>>>>>>> 3ef41e6a69df63d693be550f62107160347b0ef7
 
 @main_bp.route('/academicResource')
 @login_required
@@ -173,7 +227,13 @@ def add_favorite():
 @login_required
 def wellness_resources():
     """Wellness resources page"""
-    return render_template('wellnessResources.html')
+    #Get user's favorite wellness resources
+    favoritets = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='wellness'
+    ).all()
+    favorite_ids = [fav.resource_id for fav in favoritets]
+    return render_template('wellnessResources.html', favorite_ids=favorite_ids)
 
 @main_bp.route('/career-internship-resources')
 @login_required

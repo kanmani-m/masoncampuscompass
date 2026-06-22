@@ -35,6 +35,11 @@ def favorites():
         user_id=current_user.id,
         resource_type='wellness'
     ).all()
+    # Get user's favorite academic resources
+    academic_favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='academic'
+    ).all()
 
     # Create a mapping of favorite IDs to display names
     favorite_map = {
@@ -108,6 +113,61 @@ def favorites():
             'icon': '✊',
             'url': 'https://ssac.gmu.edu/'
         },
+
+        ####### academic resources
+        'academicResource1': {
+            'name': 'Math Tutoring',
+            'icon': '📚',
+            'url': 'https://science.gmu.edu/academics/departments-units/mathematical-sciences/math-tutoring'
+        },
+        'academicResource2': {
+            'name': 'The Writing Center',
+            'icon': '📚',
+            'url': 'https://writingcenter.gmu.edu/'
+        },
+        'academicResource3': {
+            'name': 'The Communication Center',
+            'icon': '📚',
+            'url': 'https://communicationcenter.gmu.edu/'
+        },       
+        'academicResource4': {
+            'name': 'Academic Coaching Program',
+            'icon': '📚',
+            'url': 'https://learningservices.gmu.edu/'
+        },
+        'academicResource5': {
+            'name': 'Learning Resources for Multilingual Students',
+            'icon': '📚',
+            'url': 'https://intomason.gmu.edu/current-students/learning-resource-center'
+        },  
+        'academicResource6': {
+            'name': 'Learning Resources for Online Students',
+            'icon': '📚',
+            'url': 'https://learningservices.gmu.edu/learning-resources/online-learning/'
+        },
+        'academicResource7': {
+            'name': 'Disability Services',
+            'icon': '📚',
+            'url': 'https://ds.gmu.edu/'
+        },
+        'academicResource8': {
+            'name': 'Transfer-Student Advising',
+            'icon': '📚',
+            'url': 'https://advising.gmu.edu/transferstudents/'
+        },       
+        'academicResource9': {
+            'name': 'First-Year GMU Student Advising',
+            'icon': '📚',
+            'url': 'https://advising.gmu.edu/firstyear/'
+        },
+        'academicResource10': {
+            'name': 'GMU Library Hub',
+            'icon': '📚',
+            'url': 'https://library.gmu.edu/'
+        }, 
+
+
+        ##end academic resource display#########
     }
     
     favorites_display = []
@@ -126,6 +186,12 @@ def favorites():
         if fav.resource_id in favorite_map:
             favorites_display.append(favorite_map[fav.resource_id])
 
+    #academics
+    for fav in academic_favorites:
+        if fav.resource_id in favorite_map:
+            favorites_display.append(favorite_map[fav.resource_id])
+    
+
     return render_template(
         'favorites.html',
         username=current_user.username,
@@ -139,11 +205,14 @@ def dashboard_redirect():
     """Legacy dashboard route kept for backward compatibility."""
     return redirect(url_for('main.favorites'))
 
+
 @main_bp.route('/academicResource')
 @login_required
 def academicResource():
     """Academic resource page"""
-    return render_template('academicResources.html')
+    favorites=Favorite.query.filter_by(user_id=current_user.id, resource_type='academic').all()
+    favorite_ids=[fav.resource_id for fav in favorites]
+    return render_template('academicResources.html', favorite_ids=favorite_ids)
 
 @main_bp.route('/dining')
 @login_required

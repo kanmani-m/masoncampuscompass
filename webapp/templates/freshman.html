@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/freshman.css') }}"
+/>
+{% endblock %} 
+
+{% block title %}Freshman Resources at GMU{% endblock %} 
+
+{% block content %}
+
+<div class="freshman-banner">
+  <h1>🧑🏻‍🏫 Freshman/First-year Student Resources at GMU!</h1>
+  <p> 
+    This page provides a collection of resources and support services for
+    freshman/first-year students at George Mason University.
+  </p>
+</div>
+
+<!-- card template from bootstrap: https://getbootstrap.com/docs/5.0/components/card/#examples -->
+
+<div class="resource_cards">
+  <div class="card" style="width: 20rem">
+    <img
+      class="card-img-top"
+      src="/static/img/alghozy-nx4YXK8g2Wo-unsplash.jpg"
+      alt="Card image cap"
+    />
+    <div class="card-body">
+      <h5 class="card-title"> New College-Student Resources</h5>
+      <p class="card-text"> This page will provide new students with information on how to get started at GMU, including resources such as student services center, student checklists, and student communities on campus. 
+      </p>
+      <div class="card-actions">
+        <a
+          href="https://orientation.gmu.edu/new-student-resources/"
+          target="_blank"
+          class="btn btn-primary"
+          >Click to view page</a
+        >
+        <button
+          class="btn-heart {% if 'freshmanResource1' in favorite_ids %}active{% endif %}"
+          onclick="toggleFavorite(this, 'freshmanResource1')"
+        >
+          {% if 'freshmanResource1' in favorite_ids %}♥{% else %}♡{% endif %}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="width: 20rem">
+    <img
+      class="card-img-top"
+      src="/static/img/irvan-maulana-mCeDm54fq8c-unsplash.jpg"
+      alt="Card image cap"
+    />
+    <div class="card-body">
+      <h5 class="card-title">GMU Life Resources</h5>
+      <p class="card-text">
+        This resource will provide students with information on how to get settled in student on campus. This page includes information on student organizations, career and internships, and academic assistance. 
+      </p>
+      <div class="card-actions">
+        <a
+          href="https://orientation.gmu.edu/university-life-resources/"
+          target="_blank"
+          class="btn btn-primary"
+          >Click to view page</a
+        >
+        <button
+          class="btn-heart {% if 'freshmanResource2' in favorite_ids %}active{% endif %}"
+          onclick="toggleFavorite(this, 'freshmanResource2')"
+        >
+          {% if 'freshmanResource2' in favorite_ids %}♥{% else %}♡{% endif %}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="width: 20rem">
+    <img
+      class="card-img-top"
+      src="/static/img/muhammad-noor-ridho-7pMEf2GNZiQ-unsplash.jpg"
+      alt="Card image cap"
+    />
+    <div class="card-body">
+      <h5 class="card-title">Freshman Resources - Simple Links</h5>
+      <p class="card-text">
+        This page will provide first-year students with quick links to resources such as GMU student services and student apps.
+      </p>
+      <div class="card-actions">
+        <a
+          href="https://orientation.gmu.edu/first-year-student-resources/"
+          target="_blank"
+          class="btn btn-primary"
+          >Click to view page</a
+        >
+        <button
+          class="btn-heart {% if 'freshmanResource3' in favorite_ids %}active{% endif %}"
+          onclick="toggleFavorite(this, 'freshmanResource3')"
+        >
+          {% if 'freshmanResource3' in favorite_ids %}♥{% else %}♡{% endif %}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="width: 20rem">
+    <img
+      class="card-img-top"
+      src="/static/img/public-domain-vectors-DJljIquCNzc-unsplash.jpg"
+      alt="Card image cap"
+    />
+    <div class="card-body">
+      <h5 class="card-title">First-Year Academic Advising</h5>
+      <p class="card-text">
+        This page will provide first-year students with information on academic advising
+        and how to get help with their academic goals.
+      </p>
+      <div class="card-actions">
+        <a
+          href="https://advising.gmu.edu/firstyear/"
+          target="_blank"
+          class="btn btn-primary"
+          >Click to view page</a
+        >
+        <button
+          class="btn-heart {% if 'freshmanResource4' in favorite_ids %}active{% endif %}"
+          onclick="toggleFavorite(this, 'freshmanResource4')"
+        >
+          {% if 'freshmanResource4' in favorite_ids %}♥{% else %}♡{% endif %}
+        </button>
+      </div>
+    </div>
+  </div>
+
+    <div class="card" style="width: 20rem">
+      <img
+        class="card-img-top"
+        src="/static/img/public-domain-vectors-JHOTr4_Z5yA-unsplash.jpg"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title"> Connecting with Students</h5>
+        <p class="card-text">
+This page has insightful events listed for first-year students. it is intended to help first-year students to connect with other students, as well as strengthen the Mason community.
+        </p>
+        <div class="card-actions">
+          <a
+            href="https://fyc.gmu.edu/first-year-programs/"
+            target="_blank"
+            class="btn btn-primary"
+            >Click to view page</a
+          >
+          <button
+            class="btn-heart {% if 'freshmanResource5' in favorite_ids %}active{% endif %}"
+            onclick="toggleFavorite(this, 'freshmanResource5')"
+          >
+            {% if 'freshmanResource5' in favorite_ids %}♥{% else %}♡{% endif %}
+          </button>
+        </div>
+      </div>
+    </div>
+
+      <div class="card" style="width: 20rem">
+        <img
+          class="card-img-top"
+          src="/static/img/public-domain-vectors-M7c1u9-08JA-unsplash.jpg"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Mason360</h5>
+          <p class="card-text">
+            Used by all Mason students, this app/web is a great entry point for freshmans to find out about events, student organizations, and other resources on campus.
+          </p>
+          <div class="card-actions">
+            <a
+              href="https://mason360.gmu.edu/home_login"
+              target="_blank"
+              class="btn btn-primary"
+              >Click to view page</a
+            >
+            <button
+              class="btn-heart {% if 'freshmanResource6' in favorite_ids %}active{% endif %}"
+              onclick="toggleFavorite(this, 'freshmanResource6')"
+            >
+              {% if 'freshmanResource6' in favorite_ids %}♥{% else %}♡{% endif
+              %}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      
+        </div>
+          <!-- end resource cards -->
+
+          <!-- button scripting -->
+        <script>
+          function toggleFavorite(btn, resourceId) {
+            const isFavorited = btn.classList.contains("active");
+
+            fetch("/add_favorite", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                resource_id: resourceId,
+                resource_type: "freshman",
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.success) {
+                  btn.classList.toggle("active");
+                  btn.textContent = isFavorited ? "♡" : "♥";
+                }
+              })
+              .catch((error) => console.error("Error:", error));
+          }
+        </script>
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -57,6 +57,10 @@ def favorites():
         resource_type='transfer'
     ).all()
 
+    freshman_favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='freshman'
+    ).all()
     # Create a mapping of favorite IDs to display names
     favorite_map = {
         #dining resources
@@ -261,6 +265,39 @@ def favorites():
             'url': 'https://sga.gmu.edu/'
         },
 
+        #freshman resources
+        'freshmanResource1': {
+            'name': 'New College-Student Resources',
+            'icon': '📓',
+            'url': 'https://orientation.gmu.edu/new-student-resources/'
+        },
+        'freshmanResource2': {
+            'name': 'GMU Life Resources',
+            'icon': '📓',
+            'url': 'https://orientation.gmu.edu/university-life-resources/'
+        },
+        'freshmanResource3': {
+            'name': 'Freshman Resources - Simple Links',
+            'icon': '📓',
+            'url': 'https://orientation.gmu.edu/first-year-student-resources/'
+        },
+        'freshmanResource4': {
+            'name': 'First-Year Academic Advising',
+            'icon': '📓',
+            'url': 'https://advising.gmu.edu/firstyear/'
+        },
+        'freshmanResource5': {
+            'name': 'Mason360',
+            'icon': '📓',
+            'url': 'https://fyc.gmu.edu/first-year-programs/'
+        },
+        'freshmanResource6': {
+            'name': 'Student Government',
+            'icon': '📓',
+            'url': 'https://mason360.gmu.edu/home_login'
+        },
+
+
         #transfer student resources
         'general_transfer_student_resources': {
             'name': 'General Transfer Student Resources',
@@ -331,6 +368,12 @@ def favorites():
         if fav.resource_id in favorite_map:
             favorites_display.append(favorite_map[fav.resource_id])
 
+    #freshman
+    for fav in freshman_favorites:
+        if fav.resource_id in favorite_map:
+            favorites_display.append(favorite_map[fav.resource_id])
+
+    #rendering        
     return render_template(
         'favorites.html',
         username=current_user.username,
@@ -473,6 +516,20 @@ def transfer_resources():
     favorite_ids = [fav.resource_id for fav in favorites]
     
     return render_template('transfer.html', favorite_ids=favorite_ids)
+
+# freshman resource page
+@main_bp.route('/freshman-resources')
+@login_required
+def freshman_resources():
+    """Freshman resources page"""
+    # Get user's favorite career resources
+    favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='freshman'
+    ).all()
+    favorite_ids = [fav.resource_id for fav in favorites]
+    
+    return render_template('freshman.html', favorite_ids=favorite_ids)
 
 
 

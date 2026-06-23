@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/transfer.css') }}">
+{% endblock %}
+
+{% block title %}Transfer Resources - GMU Campus Compass{% endblock %}
+
+{% block content %}
+<!-- Transfer Banner -->
+<div class="transfer-banner">
+  <div class="transfer-banner-box">
+    <span class="banner-tag">Transfer Information</span>
+    <h1>🎒 Transfer Information</h1>
+    <p>Resources and support services to help you transition smoothly to GMU.</p>
+  </div>
+</div>
+
+<!-- Follow academicResources layout but show transfer cards -->
+<div class="resource_cards" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="{{ url_for('static', filename='img/general.jpg') }}" alt="Student Health">
+    <div class="card-body">
+      <h5 class="card-title">📚 General Transfer Student Resources</h5>
+      <p class="card-text">Explore resources, information, and opportunities for prospective, newly admitted, and current transfer students.</p>
+      <a href="https://contemporary.gmu.edu/transfer-students/" target="_blank" class="btn btn-success">Visit site</a>
+      <button class="btn-heart {% if 'general_transfer_student_resources' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'general_transfer_student_resources')">{% if 'general_transfer_student_resources' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
+  </div>
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="{{ url_for('static', filename='img/orientationmaterials.jpg') }}" alt="Counseling">
+    <div class="card-body">
+      <h5 class="card-title">📘 Transfer Orientation Materials</h5>
+      <p class="card-text">Prepare for orientation with advising guides, transfer credit resources, registration information, and degree planning materials.</p>
+      <a href="https://globalaffairs.gmu.edu/undergraduate/advising/new-transfer-orientation-materials" target="_blank" class="btn btn-success">Visit site</a>
+      <button class="btn-heart {% if 'transfer_orientation_materials' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'transfer_orientation_materials')">{% if 'transfer_orientation_materials' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
+  </div>
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="{{ url_for('static', filename='img/transfercourse.jpg') }}" alt="Community Mental Health">
+    <div class="card-body">
+      <h5 class="card-title">🎓 UNIV 300 / Transfer Transition course</h5>
+      <p class="card-text">A 1-credit transition course designed to help new transfer students connect with campus resources and succeed at Mason.</p>
+      <a href="https://univstudies.gmu.edu/freshman/ " target="_blank" class="btn btn-success">Visit site</a>
+      <button class="btn-heart {% if 'transfer_transition_course' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'transfer_transition_course')">{% if 'transfer_transition_course' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
+  </div>
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="{{ url_for('static', filename='img/transferadvising.jpg') }}" alt="Accessibility">
+    <div class="card-body">
+      <h5 class="card-title">👥 Transfer Student Advising</h5>
+      <p class="card-text">Connect with transfer advisors for guidance on academic planning, transfer credits, and your transition to Mason..</p>
+      <a href="https://advising.gmu.edu/transferstudents/ " target="_blank" class="btn btn-success">Visit site</a>
+      <button class="btn-heart {% if 'transfer_student_advising' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'transfer_student_advising')">{% if 'transfer_student_advising' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
+  </div>
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="{{ url_for('static', filename='img/successcoach.jpg') }}" alt="Advocacy">
+    <div class="card-body">
+      <h5 class="card-title">🤝 Find Your Success Coach</h5>
+      <p class="card-text">Connect with your dedicated success coach for personalized academic and career guidance.</p>
+      <a href="https://coaching.gmu.edu/findyourcoach/ " target="_blank" class="btn btn-success">Visit site</a>
+      <button class="btn-heart {% if 'transfer_student_mentorship' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'transfer_student_mentorship')">{% if 'transfer_student_mentorship' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
+  </div>
+
+  <div class="card" style="width: 15rem;">
+    <img class="card-img-top" src="{{ url_for('static', filename='img/checklist.jpg') }}" alt="Mindful Workshops">
+    <div class="card-body">
+      <h5 class="card-title">🗺️ Next Steps for Admitted Transfer Students</h5>
+      <p class="card-text">A step-by-step guide for admitted transfer students to prepare for their first semester at Mason.</p>
+      <a href="https://www.gmu.edu/transfer/next-steps" target="_blank" class="btn btn-success">Event details</a>
+      <button class="btn-heart {% if 'next_steps_transfer_students' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'next_steps_transfer_students')">{% if 'next_steps_transfer_students' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
+  </div>
+
+</div>
+
+
+
+<script>
+    function toggleFavorite(btn, resourceId) {
+        const isFavorited = btn.classList.contains('active');
+        
+        fetch('/add_favorite', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                resource_id: resourceId,
+                resource_type: 'transfer'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                btn.classList.toggle('active');
+                btn.textContent = isFavorited ? '♡' : '♥';
+            } else {
+                console.error('Error saving favorite:', data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+{% endblock %}
+
+

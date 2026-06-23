@@ -86,3 +86,13 @@
     font-size: 2rem;
   }
 }
+.btn-heart {
+  color: rgb(236, 201, 0);
+  font-size: 2rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.btn-heart:hover {
+  color: #e63946;
+}

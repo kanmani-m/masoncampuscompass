@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block styles %}
+{% block css %}
 <!-- Added ?v=1 to bypass browser caching -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/careerInternResources.css') }}?v=1">
 {% endblock %}
@@ -7,6 +7,15 @@
 {% block title %}Career and Internship Resources at GMU{% endblock %}
 
 {% block content %}
+
+<div class="academic-banner">
+  <h1>💼 Career and Internship Resources at GMU</h1>
+  <p>
+    find information on career and internship opportunities, resources, and guidance for students at George Mason University
+  </p>
+</div>
+
+
 <!-- card template from bootstrap: https://getbootstrap.com/docs/5.0/components/card/#examples -->
 <div class="resource_cards" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;"  >
 <div class="career-card" style="width: 15rem;">

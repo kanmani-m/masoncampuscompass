@@ -1,1 +1,0 @@
-# We have to rename the folder accordingly for which we are running the tests. For example, if we are running tests for the "webapp" folder, we should rename this folder to "webapp_tests". This is because pytest will automatically discover tests in folders that start with "test_" or end with "_tests".

@@ -51,6 +51,12 @@ def favorites():
         resource_type='campus_events_clubs'
     ).all()
 
+    #Get user's favorite transfer student resources
+    transfer_favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='transfer'
+    ).all()
+
     # Create a mapping of favorite IDs to display names
     favorite_map = {
         #dining resources
@@ -253,7 +259,39 @@ def favorites():
             'name': 'Student Government',
             'icon': '📢',
             'url': 'https://sga.gmu.edu/'
-        }
+        },
+
+        #transfer student resources
+        'general_transfer_student_resources': {
+            'name': 'General Transfer Student Resources',
+            'icon': '📚',
+            'url': 'https://contemporary.gmu.edu/transfer-students/'
+        }, 
+        'transfer_orientation_materials': {
+            'name': 'Transfer Orientation Materials',
+            'icon': '📘',
+            'url': 'https://globalaffairs.gmu.edu/undergraduate/advising/new-transfer-orientation-materials'
+        },
+        'transfer_transition_course': {
+            'name': 'UNIV 300 / Transfer Transition course',
+            'icon': '🎓',
+            'url': 'https://univstudies.gmu.edu/freshman/ '
+        },
+        'transfer_student_advising': {
+            'name': 'Transfer Student Advising',
+            'icon': '👥',
+            'url': 'https://advising.gmu.edu/transferstudents/transfer-student-community/'
+        },
+        'transfer_student_mentorship': {
+            'name': 'Find Your Success Coach',
+            'icon': '🤝',
+            'url': 'https://coaching.gmu.edu/findyourcoach/ '
+        },
+        'next_steps_transfer_students': {
+            'name': 'Next Steps for Admitted Transfer Students',
+            'icon': '🗺️',
+            'url': 'https://www.gmu.edu/transfer/next-steps'
+        },
 
     }
     
@@ -285,6 +323,11 @@ def favorites():
 
     #campus events and clubs
     for fav in campus_events_clubs_favorites:
+        if fav.resource_id in favorite_map:
+            favorites_display.append(favorite_map[fav.resource_id])
+
+    #transfer student resources
+    for fav in transfer_favorites:
         if fav.resource_id in favorite_map:
             favorites_display.append(favorite_map[fav.resource_id])
 
@@ -417,6 +460,19 @@ def career_internship_resources():
     favorite_ids = [fav.resource_id for fav in favorites]
     
     return render_template('careerInternResources.html', favorite_ids=favorite_ids)
+
+@main_bp.route('/transfer-resources')
+@login_required
+def transfer_resources():
+    """Transfer student resources page"""
+    # Get user's favorite transfer resources
+    favorites = Favorite.query.filter_by(
+        user_id=current_user.id,
+        resource_type='transfer'
+    ).all()
+    favorite_ids = [fav.resource_id for fav in favorites]
+    
+    return render_template('transfer.html', favorite_ids=favorite_ids)
 
 
 

@@ -353,6 +353,7 @@ def campus_events_clubs():
     return render_template('campusEventsClubs.html', favorite_ids=favorite_ids)
 
 
+
 @main_bp.route('/add_favorite', methods=['POST'])
 @login_required
 def add_favorite():

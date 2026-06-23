@@ -54,12 +54,13 @@
 
 }
 
-.favorite-toggle.ms-2 {
+.btn-heart {
     color: rgb(236, 201, 0);
     font-size: 2rem;
     cursor: pointer;
+    background: none;
+    border: none;
 }
-
-.favorite-toggle:hover {
+.btn-heart:hover {
     color: #e63946;
 }

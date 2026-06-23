@@ -192,7 +192,37 @@ def favorites():
             'icon': '🅿️',
             'url': 'https://transportation.gmu.edu/parking/#ResidentStudents'
         },
-
+        'shuttles_information': {
+            'name': 'Shuttles Information',
+            'icon': '🚌',
+            'url': 'https://transportation.gmu.edu/shuttles/'
+        },
+        'patriot_lift_information': {
+            'name': 'Patriot Lift Information',
+            'icon': '🅿️',
+            'url': 'https://transportation.gmu.edu/patriotlift/'
+        },
+        'bike_program_information': {
+            'name': 'Bike Program Information',
+            'icon': '🚲',
+            'url': 'https://transportation.gmu.edu/bike/'
+        },
+        'smartrip_program_information': {
+            'name': 'SmarTrip Program Information',
+            'icon': '🚇',
+            'url': 'https://transportation.gmu.edu/smartrip/'
+        },
+        'zipcar_at_mason_information': {
+            'name': 'Zipcar at Mason Information',
+            'icon': '🚕',
+            'url': 'https://www.zipcar.com/universities/george-mason-university'
+        },
+        'airport_transportation_information': {
+            'name': 'Airport Transportation Information',
+            'icon': '✈️',
+            'url': 'https://transportation.gmu.edu/airport-transportation/'
+        },
+        
         #campus events and clubs
         'mason360_student_orgs': {
             'name': 'Mason360 – Student Orgs',

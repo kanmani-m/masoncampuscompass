@@ -18,7 +18,7 @@
 <section class="transportation-grid">
 
   <div class="transportation-card">
-    <div class="transportation-icon">🚌</div>
+    <div class="transportation-icon">🚍</div>
     <h2>GMU Transportation Services</h2>
     <p>Learn about biking, carpooling, Patriot Lift, airport transportation, SmarTrip, and public buses.</p>
     <div class="card-actions">
@@ -39,6 +39,9 @@
     </div>
   </div>
 
+
+
+
   <div class="transportation-card">
     <div class="transportation-icon">🅿️</div>
     <h2>Parking Information</h2>
@@ -50,6 +53,106 @@
       <button class="btn-heart {% if 'parking_information' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'parking_information')">{% if 'parking_information' in favorite_ids %}♥{% else %}♡{% endif %}</button>
     </div>
   </div>
+
+
+
+
+  <div class="transportation-card">
+    <div class="transportation-icon">🚌</div>
+    <h2>Shuttles Information</h2>
+    <p>Free shuttle services between campuses and nearby locations.</p>
+    <div class="card-actions">
+      <a href="https://transportation.gmu.edu/shuttles/" target="_blank" class="transportation-btn">
+        Visit Site
+      </a>
+      <button class="btn-heart {% if 'shuttles_information' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'shuttles_information')">{% if 'shuttles_information' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="transportation-card">
+    <div class="transportation-icon">🅿️</div>
+    <h2>Patriot Lift Information</h2>
+    <p>Accessible transportation service that helps students travel safely around campus and connect with university resources.
+Link:</p>
+    <div class="card-actions">
+      <a href="https://transportation.gmu.edu/patriotlift/" target="_blank" class="transportation-btn">
+        Visit Site
+      </a>
+      <button class="btn-heart {% if 'patriot_lift_information' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'patriot_lift_information')">{% if 'patriot_lift_information' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
+  </div>
+
+
+
+  
+  <div class="transportation-card">
+    <div class="transportation-icon">🚲</div>
+    <h2>Bike Program Information</h2>
+    <p>Bike parking, repair stations, and cycling resources.
+
+Link:</p>
+    <div class="card-actions">
+      <a href="https://transportation.gmu.edu/bike/" target="_blank" class="transportation-btn">
+        Visit Site
+      </a>
+      <button class="btn-heart {% if 'bike_program_information' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'bike_program_information')">{% if 'bike_program_information' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
+  </div>
+
+
+
+  <div class="transportation-card">
+    <div class="transportation-icon">🚇</div>
+    <h2>SmarTrip Program Information</h2>
+    <p>Discounted transit cards and public transportation options.
+
+Link:</p>
+    <div class="card-actions">
+      <a href="https://transportation.gmu.edu/smartrip/" target="_blank" class="transportation-btn">
+        Visit Site
+      </a>
+      <button class="btn-heart {% if 'smartrip_program_information' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'smartrip_program_information')">{% if 'smartrip_program_information' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
+  </div>
+
+
+  <div class="transportation-card">
+    <div class="transportation-icon">✈️</div>
+    <h2>Airport Transportation Information</h2>
+    <p>Transportation options to Dulles and Reagan airports.
+Link:</p>
+    <div class="card-actions">
+      <a href="https://transportation.gmu.edu/transportation-services/" target="_blank" class="transportation-btn">
+        Visit Site
+      </a>
+      <button class="btn-heart {% if 'airport_transportation_information' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'airport_transportation_information')">{% if 'airport_transportation_information' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
+  </div>
+
+
+
+   <div class="transportation-card">
+    <div class="transportation-icon">🚕</div>
+    <h2>Zipcar at Mason Information</h2>
+    <p>Rent a car by the hour or day for errands, trips, or emergencies without owning a vehicle.
+Link:</p>
+    <div class="card-actions">
+      <a href="https://www.zipcar.com/universities/george-mason-university" target="_blank" class="transportation-btn">
+        Visit Site
+      </a>
+      <button class="btn-heart {% if 'zipcar_at_mason_information' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'zipcar_at_mason_information')">{% if 'zipcar_at_mason_information' in favorite_ids %}♥{% else %}♡{% endif %}</button>
+    </div>
+  </div>
+
+  
+
+
+
+
 
 <script>
     function toggleFavorite(btn, resourceId) {

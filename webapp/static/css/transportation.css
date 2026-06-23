@@ -72,3 +72,41 @@
     grid-template-columns: 1fr;
   }
 } 
+
+
+
+
+
+
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.transportation-btn {
+  flex: 1;
+  display: block;
+  text-align: center;
+  background: #006633;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-heart {
+  border: none;
+  background: transparent;
+  color: #c7c7c7;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+.btn-heart.active {
+  color: #ef4444;
+}

@@ -39,6 +39,11 @@
     </div>
   </div>
 
+
+
+
+
+
   <div class="transportation-card">
     <div class="transportation-icon">🅿️</div>
     <h2>Parking Information</h2>
@@ -51,29 +56,8 @@
     </div>
   </div>
 
-</section>
-<script>
-    function toggleFavorite(btn, resourceId) {
-        const isFavorited = btn.classList.contains('active');
-        
-        fetch('/add_favorite', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                resource_id: resourceId,
-                resource_type: 'transportation'
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                btn.classList.toggle('active');
-                btn.textContent = isFavorited ? '♡' : '♥';
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    }
-</script>
+  
+
+
+
 {% endblock %}

@@ -118,7 +118,7 @@ def test_transportation_redirect_or_loads(client):
 
 
 def test_transfer_redirect_or_loads(client):
-    response = client.get("/transfer", follow_redirects=False)
+    response = client.get("/transfer-resources", follow_redirects=False)
     assert response.status_code in [200, 302]
 
 
@@ -130,3 +130,4 @@ def test_logout_redirects(client):
 def test_bad_page_404(client):
     response = client.get("/this-page-does-not-exist")
     assert response.status_code == 404
+    

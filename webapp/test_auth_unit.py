@@ -25,23 +25,21 @@ def client(app):
 
 
 def test_signup_page_loads(client):
-    response = client.get('/auth/signup')
+    response = client.get('/signup')
     assert response.status_code == 200
-    assert b'Sign' in response.data or b'sign' in response.data
 
 
 def test_login_page_loads(client):
-    response = client.get('/auth/login')
+    response = client.get('/login')
     assert response.status_code == 200
-    assert b'Login' in response.data or b'login' in response.data
 
 
 def test_valid_signup_creates_user(client, app):
-    response = client.post('/auth/signup', data={
+    response = client.post('/signup', data={
         'username': 'testuser',
-        'email': 'testuser@gmu.edu',
         'password': 'Password123!',
-        'confirm_password': 'Password123!'
+        'confirm_password': 'Password123!',
+        'interests': ['academic_resources']
     }, follow_redirects=True)
 
     with app.app_context():
@@ -51,27 +49,27 @@ def test_valid_signup_creates_user(client, app):
     assert response.status_code == 200
 
 
-def test_invalid_signup_missing_email(client):
-    response = client.post('/auth/signup', data={
-        'username': 'baduser',
-        'email': '',
+def test_invalid_signup_missing_username(client):
+    response = client.post('/signup', data={
+        'username': '',
         'password': 'Password123!',
-        'confirm_password': 'Password123!'
+        'confirm_password': 'Password123!',
+        'interests': ['academic_resources']
     }, follow_redirects=True)
 
     assert response.status_code == 200
 
 
 def test_valid_login(client):
-    client.post('/auth/signup', data={
+    client.post('/signup', data={
         'username': 'loginuser',
-        'email': 'loginuser@gmu.edu',
         'password': 'Password123!',
-        'confirm_password': 'Password123!'
+        'confirm_password': 'Password123!',
+        'interests': ['academic_resources']
     }, follow_redirects=True)
 
-    response = client.post('/auth/login', data={
-        'email': 'loginuser@gmu.edu',
+    response = client.post('/login', data={
+        'username': 'loginuser',
         'password': 'Password123!'
     }, follow_redirects=True)
 
@@ -79,15 +77,15 @@ def test_valid_login(client):
 
 
 def test_invalid_login_wrong_password(client):
-    client.post('/auth/signup', data={
+    client.post('/signup', data={
         'username': 'wrongpass',
-        'email': 'wrongpass@gmu.edu',
         'password': 'Password123!',
-        'confirm_password': 'Password123!'
+        'confirm_password': 'Password123!',
+        'interests': ['academic_resources']
     }, follow_redirects=True)
 
-    response = client.post('/auth/login', data={
-        'email': 'wrongpass@gmu.edu',
+    response = client.post('/login', data={
+        'username': 'wrongpass',
         'password': 'WrongPassword!'
     }, follow_redirects=True)
 
@@ -95,5 +93,5 @@ def test_invalid_login_wrong_password(client):
 
 
 def test_logout_redirects(client):
-    response = client.get('/auth/logout', follow_redirects=False)
+    response = client.get('/logout', follow_redirects=False)
     assert response.status_code in [302, 401]

@@ -106,3 +106,74 @@ def test_favorites(client, monkeypatch, fake_query, fake_user):
     monkeypatch.setattr(main, "current_user", fake_user)
     response = client.get("/favorites")
     assert response.status_code == 302
+
+class Fav:
+    def __init__(self, rid):
+        self.resource_id = rid
+
+def test_favorites_display(client, monkeypatch):
+    from webapp import main
+    class Query:
+        def filter_by(self, **kwargs):
+            return self
+        def all(self):
+            return [
+                Fav("meal_plans"),
+                Fav("fake_resource")
+            ]
+    from webapp.models import Favorite
+    monkeypatch.setattr(Favorite, "query", Query())
+    user = type(
+        "User",
+        (),
+        {
+            "id": 1,
+            "username": "alex",
+            "interests": []
+        },
+    )
+    monkeypatch.setattr(main, "current_user", user)
+    response = client.get("/favorites")
+    assert response.status_code == 302
+
+def test_add_missing_resource(client):
+    response = client.post(
+        "/add_favorite",
+        json={}
+    )
+    assert response.status_code == 302
+
+def test_add_new_favorite(client, monkeypatch):
+    from webapp.models import Favorite
+    class Query:
+        def filter_by(self, **kwargs):
+            return self
+        def first(self):
+            return None
+    monkeypatch.setattr(Favorite, "query", Query())
+    response = client.post(
+        "/add_favorite",
+        json={
+            "resource_id": "meal_plans",
+            "resource_type": "dining"
+        },
+    )
+    assert response.status_code == 302
+
+def test_remove_favorite(client, monkeypatch):
+    from webapp.models import Favorite
+    class Query:
+        def filter_by(self, **kwargs):
+            return self
+        def first(self):
+            return Favorite()
+    monkeypatch.setattr(Favorite, "query", Query())
+    response = client.post(
+        "/add_favorite",
+        json={
+            "resource_id": "meal_plans",
+            "resource_type": "dining"
+        },
+    )
+    assert response.status_code == 302
+

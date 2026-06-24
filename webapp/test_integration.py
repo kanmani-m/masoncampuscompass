@@ -1,4 +1,7 @@
-#integration tests
+"""
+Integration tests for authentication, route access, and favorites.
+"""
+
 import pytest
 
 from webapp import create_app, db
@@ -15,6 +18,9 @@ from webapp.models import (
 
 @pytest.fixture
 def app(monkeypatch, tmp_path):
+    """
+    Create a temporary app and database for each integration test.
+    """
     db_file = tmp_path / "integration.sqlite3"
     monkeypatch.setenv("DATABASE_URL", f"sqlite:///{db_file.as_posix()}")
 
@@ -34,10 +40,16 @@ def app(monkeypatch, tmp_path):
 
 @pytest.fixture
 def client(app):
+    """
+    Create a Flask test client to the temporary app.
+    """
     return app.test_client()
 
 
 def signup(client, username="int_user", password="Password123!", interests=None):
+    """
+    Submit the sign-up form and follow redirects to final page.
+    """
     if interests is None:
         interests = ["academic_resources", "dining_services"]
     return client.post(
@@ -52,7 +64,14 @@ def signup(client, username="int_user", password="Password123!", interests=None)
     )
 
 
-def login(client, username="int_user", password="Password123!", follow_redirects=True):
+def login(
+    client,
+    username="int_user",
+    password="Password123!",
+    follow_redirects=True,
+):
+    """
+    Submit the login form for a user."""
     return client.post(
         "/login",
         data={"username": username, "password": password},
@@ -61,12 +80,17 @@ def login(client, username="int_user", password="Password123!", follow_redirects
 
 
 def test_public_pages_load(client):
+    """
+    Verify public pages are reachable without authentication."""
     assert client.get("/").status_code == 200
     assert client.get("/signup").status_code == 200
     assert client.get("/login").status_code == 200
 
 
 def test_signup_get_seeds_interests_once(client, app):
+    """
+    Make sure signup page access seeds default interests only once.
+    """
     client.get("/signup")
     client.get("/signup")
 
@@ -78,6 +102,8 @@ def test_signup_get_seeds_interests_once(client, app):
 
 
 def test_signup_login_logout_happy_path(client, app):
+    """
+    Test full auth flow: signup, login, protected page, and logout."""
     r_signup = signup(client)
     assert r_signup.status_code == 200
 
@@ -103,6 +129,9 @@ def test_signup_login_logout_happy_path(client, app):
 
 
 def test_authenticated_user_redirected_from_signup_and_login(client):
+    """
+    Make sure logged-in users are redirected away from auth pages.
+    """
     signup(client, username="already_in")
     login(client, username="already_in", follow_redirects=True)
 
@@ -116,6 +145,8 @@ def test_authenticated_user_redirected_from_signup_and_login(client):
 
 
 def test_duplicate_signup_rejected(client, app):
+    """
+    Verify duplicate username signup does not create a second user."""
     signup(client, username="dup_user")
     signup(client, username="dup_user")
 
@@ -125,9 +156,16 @@ def test_duplicate_signup_rejected(client, app):
 
 
 def test_invalid_login_does_not_authenticate(client):
+    """
+    Verify wrong password does not authenticate user session."""
     signup(client, username="bad_login_user")
 
-    r_bad = login(client, username="bad_login_user", password="WrongPassword!", follow_redirects=True)
+    r_bad = login(
+        client,
+        username="bad_login_user",
+        password="WrongPassword!",
+        follow_redirects=True,
+    )
     assert r_bad.status_code == 200
 
     r_favorites = client.get("/favorites", follow_redirects=False)
@@ -135,6 +173,8 @@ def test_invalid_login_does_not_authenticate(client):
 
 
 def test_dashboard_redirect_for_authenticated_user(client):
+    """
+    Check legacy dashboard route redirects authenticated users."""
     signup(client, username="dash_user")
     login(client, username="dash_user")
 
@@ -144,6 +184,8 @@ def test_dashboard_redirect_for_authenticated_user(client):
 
 
 def test_protected_routes_require_auth_then_allow_after_login(client):
+    """
+    Confirm protected routes require login and work after authentication."""
     protected_routes = [
         "/favorites",
         "/academicResource",
@@ -169,6 +211,8 @@ def test_protected_routes_require_auth_then_allow_after_login(client):
 
 
 def test_add_favorite_missing_resource_id_returns_400(client):
+    """
+    Ensure favorite endpoint validates required resource identifier."""
     signup(client, username="missing_id_user")
     login(client, username="missing_id_user")
 
@@ -179,6 +223,9 @@ def test_add_favorite_missing_resource_id_returns_400(client):
 
 
 def test_add_and_remove_favorite_toggle(client, app):
+    """
+    Verify favorite toggle adds a row first, then removes it.
+    """
     signup(client, username="fav_user")
     login(client, username="fav_user")
 
@@ -216,6 +263,8 @@ def test_add_and_remove_favorite_toggle(client, app):
 
 
 def test_favorites_aggregation_and_unknown_ids_not_rendered(client, app):
+    """
+    Verify favorites page shows known resources and hides unknown IDs."""
     signup(client, username="agg_user")
     login(client, username="agg_user")
 
@@ -224,12 +273,24 @@ def test_favorites_aggregation_and_unknown_ids_not_rendered(client, app):
         db.session.add_all(
             [
                 Favorite(user_id=user.id, resource_id="meal_plans", resource_type="dining"),
-                Favorite(user_id=user.id, resource_id="student_health_services", resource_type="wellness"),
+                Favorite(
+                    user_id=user.id,
+                    resource_id="student_health_services",
+                    resource_type="wellness",
+                ),
                 Favorite(user_id=user.id, resource_id="find_job", resource_type="career"),
                 Favorite(user_id=user.id, resource_id="academicResource1", resource_type="academic"),
                 Favorite(user_id=user.id, resource_id="mason_commutes", resource_type="transportation"),
-                Favorite(user_id=user.id, resource_id="mason360_student_orgs", resource_type="campus_events_clubs"),
-                Favorite(user_id=user.id, resource_id="general_transfer_student_resources", resource_type="transfer"),
+                Favorite(
+                    user_id=user.id,
+                    resource_id="mason360_student_orgs",
+                    resource_type="campus_events_clubs",
+                ),
+                Favorite(
+                    user_id=user.id,
+                    resource_id="general_transfer_student_resources",
+                    resource_type="transfer",
+                ),
                 Favorite(user_id=user.id, resource_id="freshmanResource1", resource_type="freshman"),
                 Favorite(user_id=user.id, resource_id="not_in_map", resource_type="dining"),
             ]
@@ -252,6 +313,8 @@ def test_favorites_aggregation_and_unknown_ids_not_rendered(client, app):
 
 
 def test_add_favorite_db_exception_returns_500(client, monkeypatch):
+    """
+    Ensure API returns 500 JSON if commit raises an exception."""
     signup(client, username="err_user")
     login(client, username="err_user")
 
@@ -271,6 +334,8 @@ def test_add_favorite_db_exception_returns_500(client, monkeypatch):
 
 
 def test_user_loader_and_extra_model_relationships(app):
+    """
+    Validate user loader and model relationships for saved resources."""
     with app.app_context():
         u = User(username="model_user")
         u.set_password("Password123!")

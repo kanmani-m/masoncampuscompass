@@ -6,3 +6,4 @@ WTForms
 psycopg2-binary
 python-dotenv
 Werkzeug
+pytest

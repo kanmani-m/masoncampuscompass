@@ -53,10 +53,6 @@ def fake_query(monkeypatch):
     class Query:
         def filter_by(self, **kwargs):
             return self
-        def all(self):
-            return []
-        def first(self):
-            return None
     from webapp.models import Favorite
     monkeypatch.setattr(Favorite, "query", Query())
 
@@ -109,8 +105,6 @@ class Fav:
 def test_favorites_display(client, monkeypatch):
     from webapp import main
     class Query:
-        def filter_by(self, **kwargs):
-            return self
         def all(self):
             return [
                 Fav("meal_plans"),
@@ -143,8 +137,6 @@ def test_add_new_favorite(client, monkeypatch):
     class Query:
         def filter_by(self, **kwargs):
             return self
-        def first(self):
-            return None
     monkeypatch.setattr(Favorite, "query", Query())
     response = client.post(
         "/add_favorite",
@@ -160,8 +152,6 @@ def test_remove_favorite(client, monkeypatch):
     class Query:
         def filter_by(self, **kwargs):
             return self
-        def first(self):
-            return Favorite()
     monkeypatch.setattr(Favorite, "query", Query())
     response = client.post(
         "/add_favorite",

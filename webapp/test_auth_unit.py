@@ -95,3 +95,13 @@ def test_invalid_login_wrong_password(client):
 def test_logout_redirects(client):
     response = client.get('/logout', follow_redirects=False)
     assert response.status_code in [302, 401]
+
+def test_home_page(client):
+    response = client.get('/')
+    assert response.status_code == 200
+
+
+
+
+
+

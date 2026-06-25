@@ -18,7 +18,10 @@
 <section class="transportation-grid">
 
   <div class="transportation-card">
-    <div class="transportation-icon">🚍</div>
+    <img src="{{ url_for('static', filename='img/GMUTranspotation_pic.jpeg') }}"
+     alt="Transportation"
+     class="resource-image">
+
     <h2>GMU Transportation Services</h2>
     <p>Learn about biking, carpooling, Patriot Lift, airport transportation, SmarTrip, and public buses.</p>
     <div class="card-actions">
@@ -27,8 +30,11 @@
     </div>
   </div>
 
+
   <div class="transportation-card">
-    <div class="transportation-icon">🚙</div>
+    <img src="{{ url_for('static', filename='img/GMU_Commute.jpeg') }}"
+     alt="Mason Commutes"
+     class="resource-image">
     <h2>Mason Commutes</h2>
     <p>Explore commute options and tools to help students travel to and from campus.</p>
     <div class="card-actions">
@@ -43,7 +49,9 @@
 
 
   <div class="transportation-card">
-    <div class="transportation-icon">🅿️</div>
+    <img src="{{ url_for('static', filename='img/gmu_Parking.jpeg') }}"
+     alt="Parking Information"
+     class="resource-image">
     <h2>Parking Information</h2>
     <p>View parking options for resident and off-campus students, permits, fees, and parking maps.</p>
     <div class="card-actions">
@@ -58,7 +66,9 @@
 
 
   <div class="transportation-card">
-    <div class="transportation-icon">🚌</div>
+    <img src="{{ url_for('static', filename='img/gmu_Shuttles.jpeg') }}"
+     alt="Shuttles Information"
+     class="resource-image">
     <h2>Shuttles Information</h2>
     <p>Free shuttle services between campuses and nearby locations.</p>
     <div class="card-actions">
@@ -74,12 +84,14 @@
 
 
   <div class="transportation-card">
-    <div class="transportation-icon">🅿️</div>
+    <img src="{{ url_for('static', filename='img/GMU_commute2.jpeg') }}"
+     alt="Patriot Lift Information"
+     class="resource-image">
     <h2>Patriot Lift Information</h2>
     <p>Accessible transportation service that helps students travel safely around campus and connect with university resources.
 Link:</p>
     <div class="card-actions">
-      <a href="https://transportation.gmu.edu/patriotlift/" target="_blank" class="transportation-btn">
+      <a href="https://transportation.gmu.edu/transportation-services/#PatriotLift" target="_blank" class="transportation-btn">
         Visit Site
       </a>
       <button class="btn-heart {% if 'patriot_lift_information' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'patriot_lift_information')">{% if 'patriot_lift_information' in favorite_ids %}♥{% else %}♡{% endif %}</button>
@@ -90,7 +102,9 @@ Link:</p>
 
   
   <div class="transportation-card">
-    <div class="transportation-icon">🚲</div>
+    <img src="{{ url_for('static', filename='img/gmu_BikeProgram.jpeg') }}"
+     alt="Bike Program Information"
+     class="resource-image">    
     <h2>Bike Program Information</h2>
     <p>Bike parking, repair stations, and cycling resources.
 
@@ -106,7 +120,9 @@ Link:</p>
 
 
   <div class="transportation-card">
-    <div class="transportation-icon">🚇</div>
+    <img src="{{ url_for('static', filename='img/gmu_SmarTripProgram.jpeg') }}"
+     alt="SmarTrip Program Information"
+     class="resource-image">    
     <h2>SmarTrip Program Information</h2>
     <p>Discounted transit cards and public transportation options.
 
@@ -121,12 +137,14 @@ Link:</p>
 
 
   <div class="transportation-card">
-    <div class="transportation-icon">✈️</div>
+    <img src="{{ url_for('static', filename='img/gmu_AirportTransportation.jpeg') }}"
+     alt="Airport Transportation Information"
+     class="resource-image">
     <h2>Airport Transportation Information</h2>
     <p>Transportation options to Dulles and Reagan airports.
 Link:</p>
     <div class="card-actions">
-      <a href="https://transportation.gmu.edu/transportation-services/" target="_blank" class="transportation-btn">
+      <a href="https://transportation.gmu.edu/transportation-services/#OtherTransportationOptions" target="_blank" class="transportation-btn">
         Visit Site
       </a>
       <button class="btn-heart {% if 'airport_transportation_information' in favorite_ids %}active{% endif %}" onclick="toggleFavorite(this, 'airport_transportation_information')">{% if 'airport_transportation_information' in favorite_ids %}♥{% else %}♡{% endif %}</button>
@@ -136,7 +154,9 @@ Link:</p>
 
 
    <div class="transportation-card">
-    <div class="transportation-icon">🚕</div>
+    <img src="{{ url_for('static', filename='img/gmu_Zipcar.jpeg') }}"
+     alt="Zipcar at Mason Information"
+     class="resource-image">    
     <h2>Zipcar at Mason Information</h2>
     <p>Rent a car by the hour or day for errands, trips, or emergencies without owning a vehicle.
 Link:</p>

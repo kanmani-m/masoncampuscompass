@@ -10,7 +10,7 @@
 }
 
 .transportation-hero p {
-  color: #555;
+  color: #dfdb65;
   font-size: 1.1rem;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .transportation-card p {
-  color: #555;
+  color: #555555;
   line-height: 1.6;
   margin-bottom: 20px;
 }
@@ -109,4 +109,12 @@
 
 .btn-heart.active {
   color: #ef4444;
+}
+
+.resource-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 15px;
 }

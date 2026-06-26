@@ -133,6 +133,11 @@ def favorites():
             'icon': '✊',
             'url': 'https://ssac.gmu.edu/'
         },
+        'mindful_workshops': {
+            'name': 'Mindful Workshops',
+            'icon': '🧘',
+            'url': 'https://wellbeing.gmu.edu/events/'
+        },
 
         #academic resources
         'academicResource1': {

@@ -287,12 +287,12 @@ def favorites():
             'url': 'https://advising.gmu.edu/firstyear/'
         },
         'freshmanResource5': {
-            'name': 'Mason360',
+            'name': 'Connecting with Students',
             'icon': '📓',
             'url': 'https://fyc.gmu.edu/first-year-programs/'
         },
         'freshmanResource6': {
-            'name': 'Student Government',
+            'name': 'Mason360',
             'icon': '📓',
             'url': 'https://mason360.gmu.edu/home_login'
         },

@@ -41,14 +41,14 @@
 
 .home-header h1 {
     font-size: 48px;
-    color: var(--gmu-green);
+    color: #ffcc33;
     margin: 0 0 10px 0;
     font-weight: 700;
 }
 
 .home-header p {
     font-size: 20px;
-    color: #666;
+    color: #ffcc33;
     margin: 0;
 }
 
@@ -62,7 +62,7 @@
 
 /* Resource Box Card */
 .resource-box {
-    background: white;
+    background: #ffffff;
     border-radius: 12px;
     padding: 40px 30px;
     box-shadow: var(--shadow);
@@ -168,27 +168,27 @@
 
 /* Color Variations for Different Boxes */
 .resource-box:nth-child(1) {
-    background: linear-gradient(135deg, rgba(0, 99, 65, 0.03), rgba(255, 184, 28, 0.03));
+    background: #ffffff;
 }
 
 .resource-box:nth-child(2) {
-    background: linear-gradient(135deg, rgba(255, 184, 28, 0.03), rgba(0, 168, 107, 0.03));
+    background: #ffffff;
 }
 
 .resource-box:nth-child(3) {
-    background: linear-gradient(135deg, rgba(0, 168, 107, 0.03), rgba(0, 99, 65, 0.03));
+    background: #ffffff;
 }
 
 .resource-box:nth-child(4) {
-    background: linear-gradient(135deg, rgba(0, 99, 65, 0.03), rgba(255, 184, 28, 0.03));
+    background: #ffffff;
 }
 
 .resource-box:nth-child(5) {
-    background: linear-gradient(135deg, rgba(255, 184, 28, 0.03), rgba(0, 168, 107, 0.03));
+    background: #ffffff;
 }
 
 .resource-box:nth-child(6) {
-    background: linear-gradient(135deg, rgba(0, 168, 107, 0.03), rgba(0, 99, 65, 0.03));
+    background: #ffffff;
 }
 
 /* Responsive Design */

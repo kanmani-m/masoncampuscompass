@@ -33,7 +33,7 @@
     font-size: 42px;
     margin: 0 0 10px 0;
     font-weight: 700;
-    color: var(--primary-color);
+    color: #ffcc33;
 
     display: flex;
     align-items: center;
@@ -44,7 +44,12 @@
 .dining-header p {
     font-size: 18px;
     margin: 0;
-    color: #666;
+    color: #ffcc33;
+}
+
+.gmu-highlight {
+    color: var(--secondary-color);
+    font-weight: 700;
 }
 
 .header-icon {

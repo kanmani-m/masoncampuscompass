@@ -4,14 +4,19 @@
 }
 
 .transportation-hero h1 {
-  color: #006633;
+  color: #ffcc33;
   font-size: 2.8rem;
   margin-bottom: 10px;
 }
 
 .transportation-hero p {
-  color: #dfdb65;
+  color: #ffcc33;
   font-size: 1.1rem;
+}
+
+.gmu-highlight {
+  color: #ffcc33;
+  font-weight: 700;
 }
 
 .transportation-grid {
